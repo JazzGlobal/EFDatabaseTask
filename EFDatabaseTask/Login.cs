@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model; 
+using Model;
+using System.Globalization; 
 
 namespace EFDatabaseTask
 {
@@ -18,10 +19,66 @@ namespace EFDatabaseTask
         {
             InitializeComponent();
         }
-        private U07lyXEntities dbcontext = new U07lyXEntities(); 
-        private void Form1_Load(object sender, EventArgs e)
+        private U07lyXEntities dbcontext = new U07lyXEntities();
+
+        private void loginButton_Click(object sender, EventArgs e)
         {
-            
+            login(); 
+        }
+        private void login()
+        {
+            string attemptedUsername = usernameTextBox.Text;
+            string attemptedPassword = passwordTextBox.Text;
+            try
+            {
+
+                dbcontext.users.Load();
+                var query = from user in dbcontext.users.Local
+                            where user.userName == attemptedUsername
+                            select user;
+
+                // Handle UserNotFound case. 
+                if(query.Count() == 0)
+                {
+                    throw new UserNotFoundException(attemptedUsername);
+                }
+
+                foreach(var user in query)
+                {
+                    if(user.password == attemptedPassword)
+                    {
+                        // Fire Succuessful Login Event.
+                        MessageBox.Show("Login Successful!");
+                        return;
+                    }
+                } 
+                // Handle Credential Mismatch case.
+                throw new MismatchingCredentialsException("Login Failed! Make sure your Username and Password match!");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+    }
+    [Serializable]
+    class MismatchingCredentialsException : Exception
+    {
+        public MismatchingCredentialsException()
+        {
+
+        }
+        public MismatchingCredentialsException(string message) : base(message)
+        {
+
+        }
+    }
+    [Serializable]
+    class UserNotFoundException : Exception
+    {
+        public UserNotFoundException(string userName) : base($"Could Not Find User: {userName}")
+        {
+
         }
     }
 }
