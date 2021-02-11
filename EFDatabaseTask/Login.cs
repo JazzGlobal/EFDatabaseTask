@@ -49,6 +49,8 @@ namespace EFDatabaseTask
                     {
                         // Fire Succuessful Login Event.
                         MessageBox.Show("Login Successful!");
+                        DataEditHub dataEditHub = new DataEditHub();
+                        dataEditHub.ShowDialog();
                         return;
                     }
                 } 
