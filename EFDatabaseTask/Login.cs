@@ -59,6 +59,10 @@ namespace EFDatabaseTask
             }
             catch (Exception e)
             {
+                // var culture = new System.Threading.Thread(() => { }).CurrentCulture;
+                // var culture = new CultureInfo(20);
+                // Console.WriteLine(culture.Name);
+                // MessageBox.Show(e.Message.ToString(culture));
                 MessageBox.Show(e.Message);
             }
         }
