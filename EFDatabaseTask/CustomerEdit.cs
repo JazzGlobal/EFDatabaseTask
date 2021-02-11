@@ -26,5 +26,10 @@ namespace EFDatabaseTask
             dbcontext.customers.OrderBy(customer => customer.customerId).Load();
             customerBindingSource.DataSource = dbcontext.customers.Local;
         }
+
+        private void customerBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            // Try Save - > Error Handle / Validate all fiels. 
+        }
     }
 }
