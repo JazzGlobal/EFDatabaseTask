@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
-using System.Globalization; 
+using System.Globalization;
+using System.Threading;
+using System.Resources;
+using System.Collections;
 
 namespace EFDatabaseTask
 {
@@ -25,8 +28,20 @@ namespace EFDatabaseTask
         {
             login(); 
         }
+
+        public static void SwitchExceptionLanguage(string s)
+        {
+            if (s.Split('-')[0].Contains("fr"))
+            {
+                Console.WriteLine("Changing Culture to fr-FR");
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
+            }
+        }
+
         private void login()
         {
+            SwitchExceptionLanguage(Thread.CurrentThread.CurrentCulture.Name);
             string attemptedUsername = usernameTextBox.Text;
             string attemptedPassword = passwordTextBox.Text;
             try
@@ -53,16 +68,12 @@ namespace EFDatabaseTask
                         dataEditHub.ShowDialog();
                         return;
                     }
-                } 
+                }
                 // Handle Credential Mismatch case.
-                throw new MismatchingCredentialsException("Login Failed! Make sure your Username and Password match!");
+                throw new MismatchingCredentialsException(Properties.Resources.MistmatchingCredentialsExceptionMessage);
             }
             catch (Exception e)
             {
-                // var culture = new System.Threading.Thread(() => { }).CurrentCulture;
-                // var culture = new CultureInfo(20);
-                // Console.WriteLine(culture.Name);
-                // MessageBox.Show(e.Message.ToString(culture));
                 MessageBox.Show(e.Message);
             }
         }
@@ -82,7 +93,7 @@ namespace EFDatabaseTask
     [Serializable]
     class UserNotFoundException : Exception
     {
-        public UserNotFoundException(string userName) : base($"Could Not Find User: {userName}")
+        public UserNotFoundException(string userName) : base($" {Properties.Resources.UserNotFoundExceptionMessage} {userName}")
         {
 
         }

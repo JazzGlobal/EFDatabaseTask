@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
+    <value>Bonjour</value>
   </data>
   <data name="MistmatchingCredentialsExceptionMessage" xml:space="preserve">
-    <value>Login Failed! Make sure your Username and Password match!</value>
+    <value>Échec de la connexion! Assurez-vous que votre nom d'utilisateur et votre mot de passe correspondent!</value>
   </data>
   <data name="UserNotFoundExceptionMessage" xml:space="preserve">
-    <value>Could Not Find User:</value>
+    <value>Impossible de trouver l'utilisateur:</value>
   </data>
 </root>
