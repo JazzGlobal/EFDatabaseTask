@@ -20,9 +20,19 @@ namespace EFDatabaseTask
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Login login = new Login();
+            ShowLoginForm();
+        }
+        public void ShowLoginForm()
+        {
+            Login login = new Login(this);
             login.MdiParent = this;
             login.Show();
+        }
+        public void ShowDataForm()
+        {
+            DataEditHub dataEditHub = new DataEditHub();
+            dataEditHub.MdiParent = this;
+            dataEditHub.Show();
         }
     }
 }
