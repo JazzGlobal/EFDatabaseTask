@@ -18,9 +18,11 @@ namespace EFDatabaseTask
 {
     public partial class Login : Form
     {
-        public Login()
+        MainForm mainForm; 
+        public Login(MainForm mainForm)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
 
@@ -64,8 +66,8 @@ namespace EFDatabaseTask
                     {
                         // Fire Succuessful Login Event.
                         MessageBox.Show("Login Successful!");
-                        DataEditHub dataEditHub = new DataEditHub();
-                        dataEditHub.ShowDialog();
+                        Close();
+                        mainForm.ShowDataForm();
                         return;
                     }
                 }
