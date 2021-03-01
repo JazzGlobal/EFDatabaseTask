@@ -29,7 +29,7 @@ namespace EFDatabaseTask
 
         private void customerBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            // Try Save - > Error Handle / Validate all fiels. 
+            dbcontext.SaveChanges();
         }
     }
 }
