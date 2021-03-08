@@ -22,5 +22,11 @@ namespace EFDatabaseTask
             CustomerEdit c_edit = new CustomerEdit();
             c_edit.ShowDialog();
         }
+
+        private void editAddressesButton_Click(object sender, EventArgs e)
+        {
+            AddressEdit a_edit = new AddressEdit();
+            a_edit.ShowDialog();
+        }
     }
 }
