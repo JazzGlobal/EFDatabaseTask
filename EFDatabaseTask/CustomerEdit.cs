@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
-using System.Data.Entity; 
+using System.Data.Entity;
+using EFDatabaseTask.DataFormExceptions;
 
 namespace EFDatabaseTask
 {
@@ -60,16 +61,5 @@ namespace EFDatabaseTask
             }
         }
     }
-    [Serializable]
-    class InvalidDatabaseItemsException : Exception
-    {
-        public InvalidDatabaseItemsException()
-        {
 
-        }
-        public InvalidDatabaseItemsException(string message) : base($"The following items were invalid: {message}")
-        {
-
-        }
-    }
 }
