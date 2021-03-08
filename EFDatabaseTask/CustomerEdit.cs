@@ -54,11 +54,8 @@ namespace EFDatabaseTask
                             validationErrors.Entry.Entity.ToString(),
                             validationError.ErrorMessage);
                         invalidProperties += $"\n{validationError.PropertyName}";
-                        // raise a new exception nesting
-                        // the current instance as InnerException
-                        
                     }
-                    throw new InvalidDatabaseItemsException(invalidProperties);
+                    throw new InvalidDatabaseItemsException(invalidProperties); // Throw new error with the invalid properties as an argument. 
                 }
             }
         }
