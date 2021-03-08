@@ -229,28 +229,24 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn4.DataPropertyName = "createDate";
             this.dataGridViewTextBoxColumn4.HeaderText = "createDate";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "createdBy";
             this.dataGridViewTextBoxColumn5.HeaderText = "createdBy";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "lastUpdate";
             this.dataGridViewTextBoxColumn6.HeaderText = "lastUpdate";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "lastUpdateBy";
             this.dataGridViewTextBoxColumn7.HeaderText = "lastUpdateBy";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // CustomerEdit
             // 

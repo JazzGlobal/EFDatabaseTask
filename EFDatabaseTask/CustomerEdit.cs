@@ -29,7 +29,50 @@ namespace EFDatabaseTask
 
         private void customerBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            dbcontext.SaveChanges();
+            try
+            {
+                SaveCustomerChanges();
+            } catch (InvalidDatabaseItemsException invDBEx)
+            {            
+               MessageBox.Show(invDBEx.Message,"Incorrect Database Items",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void SaveCustomerChanges()
+        {
+            try
+            {
+                dbcontext.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    string invalidProperties = "";
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        invalidProperties += $"\n{validationError.PropertyName}";
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        
+                    }
+                    throw new InvalidDatabaseItemsException(invalidProperties);
+                }
+            }
+        }
+    }
+    [Serializable]
+    class InvalidDatabaseItemsException : Exception
+    {
+        public InvalidDatabaseItemsException()
+        {
+
+        }
+        public InvalidDatabaseItemsException(string message) : base($"The following items were invalid: {message}")
+        {
+
         }
     }
 }
