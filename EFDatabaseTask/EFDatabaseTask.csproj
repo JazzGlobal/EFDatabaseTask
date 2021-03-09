@@ -131,6 +131,7 @@
     <Compile Include="DataEditHub.Designer.cs">
       <DependentUpon>DataEditHub.cs</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
