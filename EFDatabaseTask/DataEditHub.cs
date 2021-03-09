@@ -32,7 +32,13 @@ namespace EFDatabaseTask
         private void editAppointmentsButton_Click(object sender, EventArgs e)
         {
             AppointmentEdit a_edit = new AppointmentEdit();
-            a_edit.ShowDialog();
+            try
+            {
+                a_edit.ShowDialog();
+            } catch(InvalidOperationException ex)
+            {
+                MessageBox.Show("Unable to perform this action. Closing Appointment Window");
+            }
         }
     }
 }
