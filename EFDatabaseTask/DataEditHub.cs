@@ -38,6 +38,7 @@ namespace EFDatabaseTask
             } catch(InvalidOperationException ex)
             {
                 MessageBox.Show("Unable to perform this action. Closing Appointment Window");
+                Console.WriteLine(ex);
             }
         }
     }

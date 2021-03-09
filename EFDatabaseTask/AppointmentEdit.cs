@@ -90,6 +90,7 @@ namespace EFDatabaseTask
                     }
                     catch (ArgumentOutOfRangeException argoutofrange_ex)
                     {
+                        Console.WriteLine(argoutofrange_ex);
                         MessageBox.Show($"CustomerID: {e.FormattedValue} Does not exist. Defaulting to next existing customer.", "Validation Error" ,MessageBoxButtons.OK, MessageBoxIcon.Error);
                         var existing_customers = dbcontext.customers.OrderBy(customer => customer.customerId).AsEnumerable();
                         Model.customer customerName = existing_customers.ElementAt(0);
