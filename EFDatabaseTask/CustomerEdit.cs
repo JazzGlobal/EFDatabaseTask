@@ -39,7 +39,7 @@ namespace EFDatabaseTask
             }
         }
         private void SaveCustomerChanges()
-        {
+        {   // TODO: On Save, compare results to appointment database. If there are appointments for customerIds that no longer exist, purge them from the appointment database.
             try
             {
                 dbcontext.SaveChanges();
