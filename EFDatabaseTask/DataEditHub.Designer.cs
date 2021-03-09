@@ -31,6 +31,7 @@ namespace EFDatabaseTask
         {
             this.editCustomersButton = new System.Windows.Forms.Button();
             this.editAddressesButton = new System.Windows.Forms.Button();
+            this.editAppointmentsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // editCustomersButton
@@ -53,11 +54,22 @@ namespace EFDatabaseTask
             this.editAddressesButton.UseVisualStyleBackColor = true;
             this.editAddressesButton.Click += new System.EventHandler(this.editAddressesButton_Click);
             // 
+            // editAppointmentsButton
+            // 
+            this.editAppointmentsButton.Location = new System.Drawing.Point(12, 82);
+            this.editAppointmentsButton.Name = "editAppointmentsButton";
+            this.editAppointmentsButton.Size = new System.Drawing.Size(232, 23);
+            this.editAppointmentsButton.TabIndex = 2;
+            this.editAppointmentsButton.Text = "Edit Appointments";
+            this.editAppointmentsButton.UseVisualStyleBackColor = true;
+            this.editAppointmentsButton.Click += new System.EventHandler(this.editAppointmentsButton_Click);
+            // 
             // DataEditHub
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(257, 149);
+            this.Controls.Add(this.editAppointmentsButton);
             this.Controls.Add(this.editAddressesButton);
             this.Controls.Add(this.editCustomersButton);
             this.Name = "DataEditHub";
@@ -70,5 +82,6 @@ namespace EFDatabaseTask
 
         private System.Windows.Forms.Button editCustomersButton;
         private System.Windows.Forms.Button editAddressesButton;
+        private System.Windows.Forms.Button editAppointmentsButton;
     }
 }

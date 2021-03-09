@@ -28,5 +28,11 @@ namespace EFDatabaseTask
             AddressEdit a_edit = new AddressEdit();
             a_edit.ShowDialog();
         }
+
+        private void editAppointmentsButton_Click(object sender, EventArgs e)
+        {
+            AppointmentEdit a_edit = new AppointmentEdit();
+            a_edit.ShowDialog();
+        }
     }
 }
