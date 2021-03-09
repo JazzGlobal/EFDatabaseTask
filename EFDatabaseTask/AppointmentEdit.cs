@@ -66,10 +66,6 @@ namespace EFDatabaseTask
             }
         }
 
-        private void appointmentDataGridView_Validating(object sender, CancelEventArgs e)
-        {
-        }
-
         private void appointmentDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             string columnName = "";

@@ -230,7 +230,6 @@ namespace EFDatabaseTask
             this.appointmentDataGridView.Size = new System.Drawing.Size(494, 295);
             this.appointmentDataGridView.TabIndex = 1;
             this.appointmentDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appointmentDataGridView_CellValidating);
-            this.appointmentDataGridView.Validating += new System.ComponentModel.CancelEventHandler(this.appointmentDataGridView_Validating);
             // 
             // customerBindingSource
             // 
