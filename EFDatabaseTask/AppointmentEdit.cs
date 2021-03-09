@@ -68,6 +68,9 @@ namespace EFDatabaseTask
 
         private void appointmentDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            // TODO: Add validation logic to prevent appointments being made outside of business hours. 
+            // TODO: Add validation logic to prevent appointments from overlapping eachother.
+
             string columnName = "";
             switch(e.ColumnIndex)
             {
@@ -76,12 +79,9 @@ namespace EFDatabaseTask
                     break;
                 case 1:
                     columnName = "customerId";
-                    // set customerName to customerBindingSource -> Customer of CustomerId = customerId. 
+                    
+                    // Lambda expression below, used to make querying the customer database more efficient. We only one customer.
                     var list = dbcontext.customers.Where(customer => customer.customerId.ToString() == e.FormattedValue.ToString()).AsEnumerable();
-                    foreach(customer person in list)
-                    {
-                        Console.WriteLine(person.customerName);
-                    }
                     try
                     {
                         Model.customer customerName = list.ElementAt(0);
