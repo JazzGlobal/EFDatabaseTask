@@ -100,6 +100,7 @@ namespace EFDatabaseTask
                     catch (Exception general_ex)
                     {
                         Console.WriteLine(general_ex);
+                        Logger.Log.LogEvent("Error_Log.txt", $" Error Occurred During Validation of Appointment (CustomerId) :{general_ex}");
                     }
                     break;
             }
