@@ -60,18 +60,14 @@ namespace EFDatabaseTask
                     throw new InvalidDatabaseItemsException(invalidProperties); // Throw new error with the invalid properties as an argument. 
                 }
             }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private void appointmentDataGridView_Validating(object sender, CancelEventArgs e)
         {
-
-            foreach(DataGridViewRow row in appointmentDataGridView.Rows)
-            {
-                if (row.Cells[16] == null)
-                {
-                    Console.WriteLine("Customer was null");
-                }
-            }
         }
 
         private void appointmentDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -85,6 +81,29 @@ namespace EFDatabaseTask
                 case 1:
                     columnName = "customerId";
                     // set customerName to customerBindingSource -> Customer of CustomerId = customerId. 
+                    var list = dbcontext.customers.Where(customer => customer.customerId.ToString() == e.FormattedValue.ToString()).AsEnumerable();
+                    foreach(customer person in list)
+                    {
+                        Console.WriteLine(person.customerName);
+                    }
+                    try
+                    {
+                        Model.customer customerName = list.ElementAt(0);
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName;
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[1].Value = e.FormattedValue;
+                    }
+                    catch (ArgumentOutOfRangeException argoutofrange_ex)
+                    {
+                        MessageBox.Show($"CustomerID: {e.FormattedValue} Does not exist. Defaulting to next existing customer.", "Validation Error" ,MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        var existing_customers = dbcontext.customers.OrderBy(customer => customer.customerId).AsEnumerable();
+                        Model.customer customerName = existing_customers.ElementAt(0);
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName;
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[1].Value = customerName.customerId;
+                    }
+                    catch (Exception general_ex)
+                    {
+                        Console.WriteLine(general_ex);
+                    }
                     break;
             }
             Console.WriteLine($"Validation logic running for {appointmentDataGridView.Rows[e.RowIndex]} ... {columnName}");

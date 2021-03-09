@@ -342,6 +342,7 @@ namespace EFDatabaseTask
             this.customer.DataPropertyName = "customer";
             this.customer.HeaderText = "customer";
             this.customer.Name = "customer";
+            this.customer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // AppointmentEdit
             // 
