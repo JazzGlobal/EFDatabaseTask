@@ -65,7 +65,9 @@ namespace EFDatabaseTask
                     if(user.password == attemptedPassword)
                     {
                         // Fire Succuessful Login Event.
-                        MessageBox.Show("Login Successful!");
+                        string success = "Login Successful";
+                        MessageBox.Show(success);
+                        Logger.Log.LogEvent("Login_Log.txt", $"{success} for {attemptedUsername}");
                         Close();
                         mainForm.ShowDataForm();
                         return;
@@ -77,6 +79,7 @@ namespace EFDatabaseTask
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Log.LogEvent("Login_Log.txt", e.Message);
             }
         }
     }
