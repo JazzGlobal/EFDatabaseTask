@@ -112,6 +112,12 @@
     <Compile Include="AddressEdit.Designer.cs">
       <DependentUpon>AddressEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppointmentEdit.Designer.cs">
+      <DependentUpon>AppointmentEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </Compile>
     <EmbeddedResource Include="AddressEdit.resx">
       <DependentUpon>AddressEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppointmentEdit.resx">
+      <DependentUpon>AppointmentEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerEdit.resx">
       <DependentUpon>CustomerEdit.cs</DependentUpon>
