@@ -18,7 +18,8 @@ namespace EFDatabaseTask
 {
     public partial class Login : Form
     {
-        MainForm mainForm; 
+        MainForm mainForm;
+        public static Model.user CurrentLoggedInUser;
         public Login(MainForm mainForm)
         {
             InitializeComponent();
@@ -68,6 +69,7 @@ namespace EFDatabaseTask
                         string success = "Login Successful";
                         MessageBox.Show(success);
                         Logger.Log.LogEvent("Login_Log.txt", $"{success} for {attemptedUsername}");
+                        CurrentLoggedInUser = user;
                         Close();
                         mainForm.ShowDataForm();
                         return;
