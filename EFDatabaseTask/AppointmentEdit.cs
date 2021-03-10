@@ -80,18 +80,24 @@ namespace EFDatabaseTask
                 case 1:
                     columnName = "customerId";
                     
-                    // Lambda expression below, used to make querying the customer database more efficient. We only one customer.
+                    // Lambda expression below, used to make querying the customer database more efficient. We only need one customer.The customer is decided
+                    // by which customerID the user attempts to enter.
                     var list = dbcontext.customers.Where(customer => customer.customerId.ToString() == e.FormattedValue.ToString()).AsEnumerable();
                     try
                     {
+                        // Attempt to assign that customer to a new Model.customer object. 
                         Model.customer customerName = list.ElementAt(0);
-                        appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName;
-                        appointmentDataGridView.Rows[e.RowIndex].Cells[1].Value = e.FormattedValue;
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName; // Set the customerName field to the name of the found customer.
+                        appointmentDataGridView.Rows[e.RowIndex].Cells[1].Value = e.FormattedValue; // Set the customerId field to the id of the found customer.
                     }
                     catch (ArgumentOutOfRangeException argoutofrange_ex)
                     {
+                        // Exception thrown if the ID does not exist in the database. Print the exception to the console, log the error, let the user know that the customer does not exist 
+                        // using a MessageBox, then default the customerId (and consequently, the customerName) to the first known customer.
                         Console.WriteLine(argoutofrange_ex);
-                        MessageBox.Show($"CustomerID: {e.FormattedValue} Does not exist. Defaulting to next existing customer.", "Validation Error" ,MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string formattedErrorMessage = $"CustomerID: {e.FormattedValue} Does not exist. Defaulting to next existing customer.";
+                        Logger.Log.LogEvent("Error_Log.txt", formattedErrorMessage);
+                        MessageBox.Show(formattedErrorMessage, "Validation Error" ,MessageBoxButtons.OK, MessageBoxIcon.Error);
                         var existing_customers = dbcontext.customers.OrderBy(customer => customer.customerId).AsEnumerable();
                         Model.customer customerName = existing_customers.ElementAt(0);
                         appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName;
