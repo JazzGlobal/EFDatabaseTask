@@ -18,6 +18,7 @@ namespace EFDatabaseTask.Logger
                 return true;
             } catch (Exception e)
             {
+                Console.WriteLine(e);
                 return false;
             }
         }
