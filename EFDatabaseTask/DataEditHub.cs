@@ -41,5 +41,17 @@ namespace EFDatabaseTask
                 Console.WriteLine(ex);
             }
         }
+
+        private void viewCalendarButton_Click(object sender, EventArgs e)
+        {
+            Calendar cal = new Calendar();
+            try
+            {
+                cal.ShowDialog();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
     }
 }
