@@ -30,6 +30,7 @@ namespace EFDatabaseTask
         private void InitializeComponent()
         {
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.eventResultBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // monthCalendar1
@@ -40,11 +41,21 @@ namespace EFDatabaseTask
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
+            // eventResultBox
+            // 
+            this.eventResultBox.Location = new System.Drawing.Point(258, 18);
+            this.eventResultBox.Name = "eventResultBox";
+            this.eventResultBox.ReadOnly = true;
+            this.eventResultBox.Size = new System.Drawing.Size(232, 162);
+            this.eventResultBox.TabIndex = 1;
+            this.eventResultBox.Text = "";
+            // 
             // Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 224);
+            this.Controls.Add(this.eventResultBox);
             this.Controls.Add(this.monthCalendar1);
             this.Name = "Calendar";
             this.Text = "Calendar";
@@ -56,5 +67,6 @@ namespace EFDatabaseTask
         #endregion
 
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.RichTextBox eventResultBox;
     }
 }

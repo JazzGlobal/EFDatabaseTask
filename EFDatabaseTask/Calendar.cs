@@ -47,11 +47,19 @@ namespace EFDatabaseTask
             var selectedDateEvents = from c_event in calendarEvents
                                      where c_event.startDate.ToString().Substring(0, 9) == e.Start.ToString().Substring(0, 9)
                                      select c_event;
-            foreach(CalendarEvent c_event in selectedDateEvents)
+            eventResultBox.Text = "";
+            if(selectedDateEvents.Count() > 0)
             {
-                Console.WriteLine(c_event.title);
+                foreach (CalendarEvent c_event in selectedDateEvents)
+                {
+                    eventResultBox.Text += $"Title: {c_event.title}\nCustomer Name: {c_event.customerName}\nStart: {c_event.startDate}\nEnd: {c_event.endDate}\nDescription: {c_event.description}\n\n";
+                }
+            } else
+            {
+                eventResultBox.Text = $"No scheduled events for {e.Start.ToString().Substring(0,9)}.";
             }
 
+            
            //  Console.WriteLine(DateTime.Now.Date.ToString().Substring(0, 9));
         }
     }
