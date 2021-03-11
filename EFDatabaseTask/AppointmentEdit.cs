@@ -122,7 +122,7 @@ namespace EFDatabaseTask
                     } catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
                     {
                         string errorMessage = $"Cannot schedule start time of appointment outside of business hours \n Business Hours: " +
-                            $"{MainForm.StartBusinessHours.ToLocalTime().Hour} - {MainForm.EndBusinessHours.ToLocalTime().Hour}";
+                            $"{MainForm.StartBusinessHours.ToLocalTime().Hour}:00 - {MainForm.EndBusinessHours.ToLocalTime().Hour - 1}:00";
                         Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);   
                         MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     } 
