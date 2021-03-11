@@ -13,6 +13,7 @@ using System.Globalization;
 using System.Threading;
 using System.Resources;
 using System.Collections;
+using EFDatabaseTask.DataFormExceptions;
 
 namespace EFDatabaseTask
 {
@@ -86,24 +87,5 @@ namespace EFDatabaseTask
             }
         }
     }
-    [Serializable]
-    class MismatchingCredentialsException : Exception
-    {
-        public MismatchingCredentialsException()
-        {
 
-        }
-        public MismatchingCredentialsException(string message) : base(message)
-        {
-
-        }
-    }
-    [Serializable]
-    class UserNotFoundException : Exception
-    {
-        public UserNotFoundException(string userName) : base($" {Properties.Resources.UserNotFoundExceptionMessage} {userName}")
-        {
-
-        }
-    }
 }
