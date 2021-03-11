@@ -24,6 +24,7 @@ namespace EFDatabaseTask
         {
             InitializeComponent();
             this.mainForm = mainForm;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
 

@@ -295,6 +295,8 @@ namespace EFDatabaseTask
             this.ClientSize = new System.Drawing.Size(516, 340);
             this.Controls.Add(this.addressDataGridView);
             this.Controls.Add(this.addressBindingNavigator);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddressEdit";
             this.Text = "AddressEdit";
             this.Load += new System.EventHandler(this.AddressEdit_Load);

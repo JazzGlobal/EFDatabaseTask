@@ -46,8 +46,6 @@ namespace EFDatabaseTask
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.appointmentBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.appointmentDataGridView = new System.Windows.Forms.DataGridView();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +63,8 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingNavigator)).BeginInit();
             this.appointmentBindingNavigator.SuspendLayout();
@@ -231,14 +231,6 @@ namespace EFDatabaseTask
             this.appointmentDataGridView.TabIndex = 1;
             this.appointmentDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appointmentDataGridView_CellValidating);
             // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(Model.customer);
-            // 
-            // customerBindingSource1
-            // 
-            this.customerBindingSource1.DataSource = typeof(Model.customer);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "appointmentId";
@@ -343,6 +335,14 @@ namespace EFDatabaseTask
             this.customer.Name = "customer";
             this.customer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(Model.customer);
+            // 
+            // customerBindingSource1
+            // 
+            this.customerBindingSource1.DataSource = typeof(Model.customer);
+            // 
             // AppointmentEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +350,8 @@ namespace EFDatabaseTask
             this.ClientSize = new System.Drawing.Size(516, 340);
             this.Controls.Add(this.appointmentDataGridView);
             this.Controls.Add(this.appointmentBindingNavigator);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AppointmentEdit";
             this.Text = "AppointmentEdit";
             this.Load += new System.EventHandler(this.AppointmentEdit_Load);

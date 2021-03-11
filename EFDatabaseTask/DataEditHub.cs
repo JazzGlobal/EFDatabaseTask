@@ -15,6 +15,7 @@ namespace EFDatabaseTask
         public DataEditHub()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void editCustomersButton_Click(object sender, EventArgs e)

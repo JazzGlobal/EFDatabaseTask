@@ -255,6 +255,8 @@ namespace EFDatabaseTask
             this.ClientSize = new System.Drawing.Size(516, 340);
             this.Controls.Add(this.customerDataGridView);
             this.Controls.Add(this.customerBindingNavigator);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CustomerEdit";
             this.Text = "CustomerEdit";
             this.Load += new System.EventHandler(this.CustomerEdit_Load);

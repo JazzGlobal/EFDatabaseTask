@@ -106,6 +106,8 @@ namespace EFDatabaseTask
             this.Controls.Add(this.editAppointmentsButton);
             this.Controls.Add(this.editAddressesButton);
             this.Controls.Add(this.editCustomersButton);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DataEditHub";
             this.Text = "DataEditHub";
             this.ResumeLayout(false);

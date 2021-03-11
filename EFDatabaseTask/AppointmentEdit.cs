@@ -18,6 +18,7 @@ namespace EFDatabaseTask
         public AppointmentEdit()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
         private void AppointmentEdit_Load(object sender, EventArgs e)

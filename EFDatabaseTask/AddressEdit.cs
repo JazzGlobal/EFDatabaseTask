@@ -18,6 +18,7 @@ namespace EFDatabaseTask
         public AddressEdit()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
 
