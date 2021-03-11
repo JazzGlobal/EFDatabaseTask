@@ -35,10 +35,6 @@ namespace EFDatabaseTask
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            timer = new System.Windows.Forms.Timer();
-            timer.Tick += new EventHandler(timer_Tick);
-            timer.Interval = 60000;
-            timer.Start();
             ShowLoginForm();
         }
         public void ShowLoginForm()
@@ -49,6 +45,11 @@ namespace EFDatabaseTask
         }
         public void ShowDataForm()
         {
+            timer = new System.Windows.Forms.Timer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = 2000;//60000;
+            timer.Start();
+
             DataEditHub dataEditHub = new DataEditHub();
             dataEditHub.MdiParent = this;
             dataEditHub.Show();
