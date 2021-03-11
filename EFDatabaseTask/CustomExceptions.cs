@@ -31,6 +31,18 @@ namespace EFDatabaseTask.DataFormExceptions
         }
     }
     [Serializable]
+    class StartTimeMustBeBeforeEndTimeException : Exception
+    {
+        public StartTimeMustBeBeforeEndTimeException()
+        {
+
+        }
+        public StartTimeMustBeBeforeEndTimeException(string message) : base(message)
+        {
+
+        }
+    }
+    [Serializable]
     class ScheduledAppointmentDuringAnotherAppointment : Exception
     {
         public ScheduledAppointmentDuringAnotherAppointment()
