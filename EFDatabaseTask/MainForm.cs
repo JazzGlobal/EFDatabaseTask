@@ -14,6 +14,9 @@ namespace EFDatabaseTask
 {
     public partial class MainForm : Form
     {
+        public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 8, 0, 0).ToUniversalTime();
+        public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 17, 0, 0).ToUniversalTime();
+
         System.Windows.Forms.Timer timer;
         List<CalendarEvent> calendarEvents;
         public MainForm()
