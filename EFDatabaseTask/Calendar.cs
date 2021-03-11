@@ -22,20 +22,20 @@ namespace EFDatabaseTask
 
         private void Calendar_Load(object sender, EventArgs e)
         {
-            // Query the database for all appointments for the currently logged in user. For each of these appointments whose date hasn't occurred ... 
-            // ... Shade the days accordingly. 
-            calendarEvents = LoadEvents();
-            foreach(CalendarEvent c_event in calendarEvents)
+            calendarEvents = LoadEvents(); // Query the database for all appointments for the currently logged in user.
+
+            foreach (CalendarEvent c_event in calendarEvents)
             {
                 monthCalendar1.AddBoldedDate(c_event.startDate);    
             }
-            monthCalendar1.UpdateBoldedDates();
+            monthCalendar1.UpdateBoldedDates(); // Shade the days accordingly. 
+
         }
         public List<CalendarEvent> LoadEvents ()
         {
             List<CalendarEvent> events = new List<CalendarEvent>();
             var appointmentList = dbcontext.appointments.Where(appointment => appointment.user.userName == Login.CurrentLoggedInUser.userName).ToList();
-            foreach (Model.appointment app in appointmentList)
+            foreach (appointment app in appointmentList)
             {
                 events.Add(new CalendarEvent(app));
             }
@@ -52,15 +52,13 @@ namespace EFDatabaseTask
             {
                 foreach (CalendarEvent c_event in selectedDateEvents)
                 {
+                    // Populate RichEditText box with event data.
                     eventResultBox.Text += $"Title: {c_event.title}\nCustomer Name: {c_event.customerName}\nStart: {c_event.startDate}\nEnd: {c_event.endDate}\nDescription: {c_event.description}\n\n";
                 }
             } else
             {
                 eventResultBox.Text = $"No scheduled events for {e.Start.ToString().Substring(0,9)}.";
-            }
-
-            
-           //  Console.WriteLine(DateTime.Now.Date.ToString().Substring(0, 9));
+            }      
         }
     }
     public class CalendarEvent 
