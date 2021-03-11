@@ -22,29 +22,36 @@ namespace EFDatabaseTask
             this.IsMdiContainer = true;
         }
         private U07lyXEntities dbcontext {
-            get { return new U07lyXEntities(); } // Return a new entity object for every get request. This is a must because otherwise the CheckForEvents() function will not have the latest and greatest appointment info.
+            get { return new U07lyXEntities(); } 
+            /**
+             * Return a new entity object for every get request. 
+             * This is a must, otherwise the CheckForEvents() function will 
+             * not have the latest and greatest appointment info when checking for alerts.
+             */
         }
         private void CheckForEvents()
         {
             calendarEvents = new List<CalendarEvent>(); 
-            Console.WriteLine("Checking for calendar events!");
-            // TODO: Query the list of meetings for the logged in user for meetings that will occur within 15 minutes.
-            var a = from app in dbcontext.appointments // Get appointments that will occur today. 
-                    where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day && app.start.Hour <= DateTime.Now.Hour
+            var a = from app in dbcontext.appointments // Get appointments that will occur today and have not yet occurred. 
+                    where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day
                     select app;
             
             foreach(appointment app in a)
             {
-                TimeSpan ts = DateTime.Now - app.start;
-                Console.WriteLine(ts.TotalMinutes);
-                if(ts.TotalMinutes > -15.10 && ts.TotalMinutes < -14)
+                if(app.start >= DateTime.Now)
                 {
-                    Console.WriteLine(" {0} Meeting in 15 minutes.", app.title);
+                    Console.WriteLine(app.start.Hour >= DateTime.Now.Hour);
+                    TimeSpan ts = app.start - DateTime.Now;
+                    Console.WriteLine(ts.TotalMinutes);
+                    if (ts.TotalMinutes < 15.10 && ts.TotalMinutes > 14)
+                    {
+                        string messageText = $"{app.title}: in 15 minutes.";
+                        Console.WriteLine(messageText);
+                        MessageBox.Show(messageText, "Meeting Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-
             }
         }
-
 
         private void timer_Tick(object sender, EventArgs e)
         {
