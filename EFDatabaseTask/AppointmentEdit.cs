@@ -110,6 +110,28 @@ namespace EFDatabaseTask
                         Logger.Log.LogEvent("Error_Log.txt", $" Error Occurred During Validation of Appointment (CustomerId) :{general_ex}");
                     }
                     break;
+                case 9:
+                    columnName = "start";
+                    try
+                    {
+                        DateTime appointmentTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
+                        if (appointmentTime.Hour < MainForm.StartBusinessHours.Hour || appointmentTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
+                        {
+                            throw new ScheduledAppointmentOutsideOfBusinessHoursException();
+                        }
+                    } catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
+                    {
+                        string errorMessage = $"Cannot schedule start time of appointment outside of business hours \n Business Hours: " +
+                            $"{MainForm.StartBusinessHours.ToLocalTime().Hour} - {MainForm.EndBusinessHours.ToLocalTime().Hour}";
+                        Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);   
+                        MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } 
+                    catch (Exception general_ex)
+                    {
+                        Console.WriteLine(general_ex);
+                        Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
+                    }
+                    break;
             }
             Console.WriteLine($"Validation logic running for {appointmentDataGridView.Rows[e.RowIndex]} ... {columnName}");
         }
