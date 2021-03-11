@@ -119,6 +119,32 @@ namespace EFDatabaseTask
                         {
                             throw new ScheduledAppointmentOutsideOfBusinessHoursException();
                         }
+
+                        var appointments = from app in dbcontext.appointments // Query appointments that are the same month and day of the user entered appointment.
+                                           where app.user.userName == Login.CurrentLoggedInUser.userName
+                                           && app.start.Month == appointmentTime.Month
+                                           && app.start.Day == appointmentTime.Day
+                                           select app;
+
+                        
+                        foreach(appointment app in appointments)
+                        {
+                            if (app.appointmentId.ToString() != appointmentDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString())
+                            /*
+                             * Do not check the app if the ID matches the validating rows ID 
+                             * (Checking same row will always result in an error.)
+                             */
+                            {
+                                if (app.start.ToUniversalTime().TimeOfDay <= appointmentTime.TimeOfDay && appointmentTime.TimeOfDay < app.end.ToUniversalTime().TimeOfDay)
+                                /*
+                                 * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
+                                 */
+                                {
+                                    throw new ScheduledAppointmentDuringAnotherAppointment();
+                                }
+                            }
+                        }
+
                     } catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
                     {
                         string errorMessage = $"Cannot schedule start time of appointment outside of business hours \n Business Hours: " +
@@ -126,6 +152,12 @@ namespace EFDatabaseTask
                         Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);   
                         MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     } 
+                    catch (ScheduledAppointmentDuringAnotherAppointment overlapEx)
+                    {
+                        string errorMessage = "Entered date / time falls within the duration of another appointment!";
+                        Logger.Log.LogEvent("Error_Log.txt", errorMessage + overlapEx);
+                        MessageBox.Show(errorMessage + overlapEx, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     catch (Exception general_ex)
                     {
                         Console.WriteLine(general_ex);
