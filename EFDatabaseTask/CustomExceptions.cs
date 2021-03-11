@@ -31,6 +31,18 @@ namespace EFDatabaseTask.DataFormExceptions
         }
     }
     [Serializable]
+    class ScheduledAppointmentDuringAnotherAppointment : Exception
+    {
+        public ScheduledAppointmentDuringAnotherAppointment()
+        {
+
+        }
+        public ScheduledAppointmentDuringAnotherAppointment(string message) : base(message)
+        {
+
+        }
+    }
+    [Serializable]
     class MismatchingCredentialsException : Exception
     {
         public MismatchingCredentialsException()
