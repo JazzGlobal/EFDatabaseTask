@@ -1,9 +1,6 @@
 ﻿using Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EFDatabaseTask
 {
@@ -15,7 +12,7 @@ namespace EFDatabaseTask
         }
         public List<appointment> GetUserAppointments(Model.user user)
         {
-            return dbcontext.appointments.Where(appointment => appointment.user.userName == user.userName).OrderBy(appointment => appointment.start).ToList(); 
+            return dbcontext.appointments.Where(appointment => appointment.user.userName == user.userName).OrderBy(appointment => appointment.start).ToList();
         }
 
         public int GetUniqueAppointmentTypes()

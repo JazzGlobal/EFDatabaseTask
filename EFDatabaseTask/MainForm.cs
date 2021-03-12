@@ -1,12 +1,8 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -24,8 +20,9 @@ namespace EFDatabaseTask
             InitializeComponent();
             this.IsMdiContainer = true;
         }
-        private U07lyXEntities dbcontext {
-            get { return new U07lyXEntities(); } 
+        private U07lyXEntities dbcontext
+        {
+            get { return new U07lyXEntities(); }
             /**
              * Return a new entity object for every get request. 
              * This is a must, otherwise the CheckForEvents() function will 
@@ -34,14 +31,14 @@ namespace EFDatabaseTask
         }
         private void CheckForEvents()
         {
-            calendarEvents = new List<CalendarEvent>(); 
+            calendarEvents = new List<CalendarEvent>();
             var a = from app in dbcontext.appointments // Get appointments that will occur today and have not yet occurred. 
                     where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day
                     select app;
-            
-            foreach(appointment app in a)
+
+            foreach (appointment app in a)
             {
-                if(app.start >= DateTime.Now)
+                if (app.start >= DateTime.Now)
                 {
                     Console.WriteLine(app.start.Hour >= DateTime.Now.Hour);
                     TimeSpan ts = app.start - DateTime.Now;

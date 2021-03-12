@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using EFDatabaseTask.DataFormExceptions;
 using Model;
+using System;
+using System.Data;
 using System.Data.Entity;
-using EFDatabaseTask.DataFormExceptions;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace EFDatabaseTask
 {
@@ -34,9 +29,10 @@ namespace EFDatabaseTask
             try
             {
                 SaveCustomerChanges();
-            } catch (InvalidDatabaseItemsException invDBEx)
-            {            
-               MessageBox.Show(invDBEx.Message,"Incorrect Database Items",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InvalidDatabaseItemsException invDBEx)
+            {
+                MessageBox.Show(invDBEx.Message, "Incorrect Database Items", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void SaveCustomerChanges()

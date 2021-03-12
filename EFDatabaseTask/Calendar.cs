@@ -1,12 +1,8 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EFDatabaseTask
@@ -26,12 +22,12 @@ namespace EFDatabaseTask
 
             foreach (CalendarEvent c_event in calendarEvents)
             {
-                monthCalendar1.AddBoldedDate(c_event.startDate);    
+                monthCalendar1.AddBoldedDate(c_event.startDate);
             }
             monthCalendar1.UpdateBoldedDates(); // Shade the days accordingly. 
 
         }
-        public List<CalendarEvent> LoadEvents ()
+        public List<CalendarEvent> LoadEvents()
         {
             List<CalendarEvent> events = new List<CalendarEvent>();
             var appointmentList = dbcontext.appointments.Where(appointment => appointment.user.userName == Login.CurrentLoggedInUser.userName).ToList();
@@ -48,27 +44,28 @@ namespace EFDatabaseTask
                                      where c_event.startDate.ToString().Substring(0, 9) == e.Start.ToString().Substring(0, 9)
                                      select c_event;
             eventResultBox.Text = "";
-            if(selectedDateEvents.Count() > 0)
+            if (selectedDateEvents.Count() > 0)
             {
                 foreach (CalendarEvent c_event in selectedDateEvents)
                 {
                     // Populate RichEditText box with event data.
                     eventResultBox.Text += $"Title: {c_event.title}\nCustomer Name: {c_event.customerName}\nStart: {c_event.startDate}\nEnd: {c_event.endDate}\nDescription: {c_event.description}\n\n";
                 }
-            } else
+            }
+            else
             {
-                eventResultBox.Text = $"No scheduled events for {e.Start.ToString().Substring(0,9)}.";
-            }      
+                eventResultBox.Text = $"No scheduled events for {e.Start.ToString().Substring(0, 9)}.";
+            }
         }
     }
-    public class CalendarEvent 
+    public class CalendarEvent
     {
         public string customerName { get; }
         public string title { get; }
         public string description { get; }
         public DateTime startDate { get; }
         public DateTime endDate { get; }
-        
+
         public CalendarEvent(Model.appointment appointment)
         {
             customerName = appointment.customer.customerName;

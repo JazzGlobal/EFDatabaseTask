@@ -1,14 +1,9 @@
 ﻿using EFDatabaseTask.DataFormExceptions;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EFDatabaseTask
@@ -235,10 +230,10 @@ namespace EFDatabaseTask
                 Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
             }
         }
-        
+
         private void appointmentDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 9 || e.ColumnIndex == 10)
+            if (e.ColumnIndex == 9 || e.ColumnIndex == 10)
             {
                 bool bothFieldsValidated = false;
                 DateTime validatingStartTime = new DateTime();

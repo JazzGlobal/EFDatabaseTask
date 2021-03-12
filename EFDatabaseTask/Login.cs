@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using EFDatabaseTask.DataFormExceptions;
+using Model;
+using System;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Model;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
-using System.Resources;
-using System.Collections;
-using EFDatabaseTask.DataFormExceptions;
+using System.Windows.Forms;
 
 namespace EFDatabaseTask
 {
@@ -31,7 +24,7 @@ namespace EFDatabaseTask
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            login(); 
+            login();
         }
 
         public static void SwitchExceptionLanguage(string s)
@@ -58,14 +51,14 @@ namespace EFDatabaseTask
                             select user;
 
                 // Handle UserNotFound case. 
-                if(query.Count() == 0)
+                if (query.Count() == 0)
                 {
                     throw new UserNotFoundException(attemptedUsername);
                 }
 
-                foreach(var user in query)
+                foreach (var user in query)
                 {
-                    if(user.password == attemptedPassword)
+                    if (user.password == attemptedPassword)
                     {
                         // Fire Succuessful Login Event.
                         string success = "Login Successful";
