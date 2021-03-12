@@ -56,6 +56,7 @@ namespace EFDatabaseTask
         {
             reportTypeComboBox.Items.Add("User Schedules");
             reportTypeComboBox.Items.Add("Unique Appointments");
+            reportTypeComboBox.SelectedIndex = 0;
         }
 
         private void generateReportButton_Click(object sender, EventArgs e)

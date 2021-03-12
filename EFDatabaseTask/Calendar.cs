@@ -25,6 +25,7 @@ namespace EFDatabaseTask
                 monthCalendar1.AddBoldedDate(c_event.startDate);
             }
             monthCalendar1.UpdateBoldedDates(); // Shade the days accordingly. 
+            monthCalendar1.SetSelectionRange(DateTime.Now, DateTime.Now);
 
         }
         public List<CalendarEvent> LoadEvents()
