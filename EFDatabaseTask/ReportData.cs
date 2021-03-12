@@ -41,6 +41,7 @@ namespace EFDatabaseTask
                               apps.start.Month,
                               apps.start.Year
                           };
+            // Lambda Usage: Used to properly group the query results into a readable format for the report.
             var grouped = results.GroupBy(a => new { a.Year, a.Month }); // Get distinct types grouped by year -> month
             foreach (var item in grouped)
             {
