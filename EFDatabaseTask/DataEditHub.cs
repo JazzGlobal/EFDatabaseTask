@@ -49,5 +49,12 @@ namespace EFDatabaseTask
                 Console.WriteLine(ex);
             }
         }
+
+        private void viewReportsButton_Click(object sender, EventArgs e)
+        {
+            // Show reporting selection form.
+            Reports r_form = new Reports();
+            r_form.ShowDialog();
+        }
     }
 }

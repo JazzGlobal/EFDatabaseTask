@@ -20,21 +20,33 @@ namespace EFDatabaseTask
         {
             // Return all appointments from current day onward, ordered by appointment start. This makes iterating in the reports easier.
             return dbcontext.appointments
-                .Where(appointment => 
-            appointment.user.userName == user.userName 
+                .Where(appointment =>
+            appointment.user.userName == user.userName
             && appointment.start.Month == DateTime.Now.Month
             && appointment.start.Day >= DateTime.Now.Day)
                 .OrderBy(appointment => appointment.start)
                 .ToList();
         }
-
         /// <summary>
-        /// Returns integer value denoting the total unique types of appointments in the current database.
+        /// 
         /// </summary>
         /// <returns></returns>
-        public int GetUniqueAppointmentTypes()
+        public List<(int, int, int)> GetUniqueAppointmentTypes()
         {
-            return dbcontext.appointments.Select(appointment => appointment.type).Distinct().Count();
+            List<(int, int, int)> list = new List<(int, int, int)>();
+            var results = from apps in dbcontext.appointments
+                          select new
+                          {
+                              apps.type,
+                              apps.start.Month,
+                              apps.start.Year
+                          };
+            var grouped = results.GroupBy(a => new {a.Year, a.Month}); // Get distinct types grouped by year -> month
+            foreach(var item in grouped)
+            {
+                list.Add((item.Count(), item.First().Month, item.First().Year));
+            }
+            return list;
         }
     }
 }
