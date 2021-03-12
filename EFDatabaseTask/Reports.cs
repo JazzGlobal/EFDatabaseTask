@@ -51,11 +51,21 @@ namespace EFDatabaseTask
             }
             return appointmentFormattedString;
         }
-
+        private string GenerateActiveCustomers()
+        {
+            List<customer> customerList = reportData.GetAllActiveCustomers();
+            string customerFormattedString = seperator;
+            foreach(customer customer in customerList)
+            {
+                customerFormattedString += $"{customer.customerName}\n";
+            }
+            return customerFormattedString;
+        }
         private void Reports_Load(object sender, EventArgs e)
         {
             reportTypeComboBox.Items.Add("User Schedules");
             reportTypeComboBox.Items.Add("Unique Appointments");
+            reportTypeComboBox.Items.Add("Active Customers");
             reportTypeComboBox.SelectedIndex = 0;
         }
 
@@ -70,6 +80,9 @@ namespace EFDatabaseTask
                     break;
                 case 1:
                     reportOutputRichEditTextbox.Text = GenerateUniqueAppointmentType();
+                    break;
+                case 2:
+                    reportOutputRichEditTextbox.Text = GenerateActiveCustomers();
                     break;
             }
         }

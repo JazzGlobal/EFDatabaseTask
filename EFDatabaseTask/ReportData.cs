@@ -27,6 +27,14 @@ namespace EFDatabaseTask
                 .OrderBy(appointment => appointment.start)
                 .ToList();
         }
+        public List<customer> GetAllActiveCustomers()
+        {
+            List<customer> customerList = new List<customer>();
+            customerList = (from customer in dbcontext.customers
+                            where customer.active == true
+                            select customer).ToList();
+            return customerList;
+        }
         /// <summary>
         /// Returns list of (appointment types, month, and year).
         /// </summary>
