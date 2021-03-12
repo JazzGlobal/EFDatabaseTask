@@ -19,6 +19,7 @@ namespace EFDatabaseTask
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            // OnDateValidated += ValidateFurther;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
         private void AppointmentEdit_Load(object sender, EventArgs e)
@@ -61,7 +62,7 @@ namespace EFDatabaseTask
                     throw new InvalidDatabaseItemsException(invalidProperties); // Throw new error with the invalid properties as an argument. 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -73,14 +74,14 @@ namespace EFDatabaseTask
             // TODO: Add validation logic to prevent appointments from overlapping eachother.
 
             string columnName = "";
-            switch(e.ColumnIndex)
+            switch (e.ColumnIndex)
             {
                 case 0:
                     columnName = "appointmentId";
                     break;
                 case 1:
                     columnName = "customerId";
-                    
+
                     // Lambda expression below, used to make querying the customer database more efficient. We only need one customer.The customer is decided
                     // by which customerID the user attempts to enter.
                     var list = dbcontext.customers.Where(customer => customer.customerId.ToString() == e.FormattedValue.ToString()).AsEnumerable();
@@ -98,7 +99,7 @@ namespace EFDatabaseTask
                         Console.WriteLine(argoutofrange_ex);
                         string formattedErrorMessage = $"CustomerID: {e.FormattedValue} Does not exist. Defaulting to next existing customer.";
                         Logger.Log.LogEvent("Error_Log.txt", formattedErrorMessage);
-                        MessageBox.Show(formattedErrorMessage, "Validation Error" ,MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(formattedErrorMessage, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         var existing_customers = dbcontext.customers.OrderBy(customer => customer.customerId).AsEnumerable();
                         Model.customer customerName = existing_customers.ElementAt(0);
                         appointmentDataGridView.Rows[e.RowIndex].Cells[16].Value = customerName;
@@ -112,60 +113,171 @@ namespace EFDatabaseTask
                     break;
                 case 9:
                     columnName = "start";
-                    try
-                    {
-                        DateTime appointmentTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
-                        if (appointmentTime.Hour < MainForm.StartBusinessHours.Hour || appointmentTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
-                        {
-                            throw new ScheduledAppointmentOutsideOfBusinessHoursException();
-                        }
-
-                        var appointments = from app in dbcontext.appointments // Query appointments that are the same month and day of the user entered appointment.
-                                           where app.user.userName == Login.CurrentLoggedInUser.userName
-                                           && app.start.Month == appointmentTime.Month
-                                           && app.start.Day == appointmentTime.Day
-                                           select app;
-
-                        
-                        foreach(appointment app in appointments)
-                        {
-                            if (app.appointmentId.ToString() != appointmentDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString())
-                            /*
-                             * Do not check the app if the ID matches the validating rows ID 
-                             * (Checking same row will always result in an error.)
-                             */
-                            {
-                                if (app.start.ToUniversalTime().TimeOfDay <= appointmentTime.TimeOfDay && appointmentTime.TimeOfDay < app.end.ToUniversalTime().TimeOfDay)
-                                /*
-                                 * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
-                                 */
-                                {
-                                    throw new ScheduledAppointmentDuringAnotherAppointment();
-                                }
-                            }
-                        }
-
-                    } catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
-                    {
-                        string errorMessage = $"Cannot schedule start time of appointment outside of business hours \n Business Hours: " +
-                            $"{MainForm.StartBusinessHours.ToLocalTime().Hour}:00 - {MainForm.EndBusinessHours.ToLocalTime().Hour - 1}:00";
-                        Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);   
-                        MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    } 
-                    catch (ScheduledAppointmentDuringAnotherAppointment overlapEx)
-                    {
-                        string errorMessage = "Entered date / time falls within the duration of another appointment!";
-                        Logger.Log.LogEvent("Error_Log.txt", errorMessage + overlapEx);
-                        MessageBox.Show(errorMessage + overlapEx, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception general_ex)
-                    {
-                        Console.WriteLine(general_ex);
-                        Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
-                    }
+                    // ValidateStartTimes(e);
+                    ValidateTimes(e);
                     break;
+                case 10:
+                    columnName = "end";
+                    // ValidateEndTimes(e);
+                    ValidateTimes(e);
+                    break;
+
             }
             Console.WriteLine($"Validation logic running for {appointmentDataGridView.Rows[e.RowIndex]} ... {columnName}");
+        }
+        private void ValidateTimes(DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                DateTime newAppTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
+                if (newAppTime.Hour < MainForm.StartBusinessHours.Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
+                {
+                    throw new ScheduledAppointmentOutsideOfBusinessHoursException();
+                }
+
+                var appointments = from app in dbcontext.appointments // Query appointments that are the same month and day of the user entered appointment.
+                                   where app.user.userName == Login.CurrentLoggedInUser.userName
+                                   && app.start.Month == newAppTime.Month
+                                   && app.start.Day == newAppTime.Day
+                                   select app;
+
+                foreach (appointment app in appointments)
+                {
+                    if (app.appointmentId.ToString() != appointmentDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString())
+                    /*
+                     * Do not check the app if the ID matches the validating rows ID 
+                     * (Checking same row will always result in an error.)
+                     */
+                    {
+                        if (app.start.ToUniversalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToUniversalTime().TimeOfDay)
+                        /*
+                         * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
+                         */
+                        {
+                            throw new ScheduledAppointmentDuringAnotherAppointment();
+                        }
+                    }
+                }
+            }
+            catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
+            {
+                ValidateFailed(e.RowIndex, e.ColumnIndex);
+                string errorMessage = $"Cannot schedule start or end time of appointment outside of business hours \n Business Hours: " +
+                    $"{MainForm.StartBusinessHours.ToLocalTime().Hour}:00 - {MainForm.EndBusinessHours.ToLocalTime().Hour - 1}:00";
+                Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);
+                MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ScheduledAppointmentDuringAnotherAppointment overlapEx)
+            {
+                ValidateFailed(e.RowIndex, e.ColumnIndex);
+                string errorMessage = "Entered date / time falls within the duration of another appointment!";
+                Logger.Log.LogEvent("Error_Log.txt", $"{errorMessage}\n{overlapEx}");
+                MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception general_ex)
+            {
+                Console.WriteLine(general_ex);
+                Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
+            }
+        }
+        private void ValidateTimes(int rowIndex, int columnIndex)
+        {
+            try
+            {
+                DateTime newAppTime = DateTime.Parse(appointmentDataGridView.Rows[rowIndex].Cells[columnIndex].FormattedValue.ToString()).ToUniversalTime();
+                if (newAppTime.Hour < MainForm.StartBusinessHours.Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
+                {
+                    throw new ScheduledAppointmentOutsideOfBusinessHoursException();
+                }
+
+                var appointments = from app in dbcontext.appointments // Query appointments that are the same month and day of the user entered appointment.
+                                   where app.user.userName == Login.CurrentLoggedInUser.userName
+                                   && app.start.Month == newAppTime.Month
+                                   && app.start.Day == newAppTime.Day
+                                   select app;
+
+                foreach (appointment app in appointments)
+                {
+                    if (app.appointmentId.ToString() != appointmentDataGridView.Rows[rowIndex].Cells[0].Value.ToString())
+                    /*
+                     * Do not check the app if the ID matches the validating rows ID 
+                     * (Checking same row will always result in an error.)
+                     */
+                    {
+                        if (app.start.ToUniversalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToUniversalTime().TimeOfDay)
+                        /*
+                         * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
+                         */
+                        {
+                            throw new ScheduledAppointmentDuringAnotherAppointment();
+                        }
+                    }
+                }
+            }
+            catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
+            {
+                ValidateFailed(rowIndex, columnIndex);
+                string errorMessage = $"Cannot schedule start or end time of appointment outside of business hours \n Business Hours: " +
+                    $"{MainForm.StartBusinessHours.ToLocalTime().Hour}:00 - {MainForm.EndBusinessHours.ToLocalTime().Hour - 1}:00";
+                Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);
+                MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ScheduledAppointmentDuringAnotherAppointment overlapEx)
+            {
+                ValidateFailed(rowIndex, columnIndex);
+                string errorMessage = "Entered date / time falls within the duration of another appointment!";
+                Logger.Log.LogEvent("Error_Log.txt", $"{errorMessage}\n{overlapEx}");
+                MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception general_ex)
+            {
+                Console.WriteLine(general_ex);
+                Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
+            }
+        }
+        
+        private void appointmentDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 9 || e.ColumnIndex == 10)
+            {
+                bool bothFieldsValidated = false;
+                DateTime validatingStartTime = new DateTime();
+                DateTime validatingEndTime = new DateTime();
+                try
+                {
+                    validatingStartTime = DateTime.Parse(appointmentDataGridView.Rows[e.RowIndex].Cells[9].FormattedValue.ToString());
+                    validatingEndTime = DateTime.Parse(appointmentDataGridView.Rows[e.RowIndex].Cells[10].FormattedValue.ToString());
+                    bothFieldsValidated = true;
+                }
+                catch (Exception ex)
+                {
+                    bothFieldsValidated = false;
+                }
+
+                if (bothFieldsValidated)
+                {
+                    try
+                    {
+                        if (validatingStartTime.ToUniversalTime().TimeOfDay > validatingEndTime.ToUniversalTime().TimeOfDay)
+                        {
+                            throw new StartTimeMustBeBeforeEndTimeException();
+                        }
+                    }
+                    catch (StartTimeMustBeBeforeEndTimeException ex)
+                    {
+                        ValidateFailed(e.RowIndex, e.ColumnIndex);
+                        string errorMessage = "Start time must be before end time.";
+                        Logger.Log.LogEvent("Error_Log.txt", errorMessage);
+                        MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    ValidateTimes(e.RowIndex, e.ColumnIndex);
+
+                }
+            }
+        }
+        private void ValidateFailed(int rowIndex, int columnIndex)
+        {
+            appointmentDataGridView.Rows[rowIndex].Cells[columnIndex].Value = "";
         }
     }
 }
