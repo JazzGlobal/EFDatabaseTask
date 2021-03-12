@@ -28,7 +28,7 @@ namespace EFDatabaseTask
                 .ToList();
         }
         /// <summary>
-        /// 
+        /// Returns list of (appointment types, month, and year).
         /// </summary>
         /// <returns></returns>
         public List<(int, int, int)> GetUniqueAppointmentTypes()
