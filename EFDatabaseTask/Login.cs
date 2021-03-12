@@ -61,7 +61,7 @@ namespace EFDatabaseTask
                     if (user.password == attemptedPassword)
                     {
                         // Fire Succuessful Login Event.
-                        string success = "Login Successful";
+                        string success = Properties.Resources.LoginSuccess;
                         MessageBox.Show(success);
                         Logger.Log.LogEvent("Login_Log.txt", $"{success} for {attemptedUsername}");
                         CurrentLoggedInUser = user;

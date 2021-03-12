@@ -70,6 +70,15 @@ namespace EFDatabaseTask.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Successful!.
+        /// </summary>
+        internal static string LoginSuccess {
+            get {
+                return ResourceManager.GetString("LoginSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login Failed! Make sure your Username and Password match!.
         /// </summary>
         internal static string MistmatchingCredentialsExceptionMessage {

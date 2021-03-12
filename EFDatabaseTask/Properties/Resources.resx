@@ -120,6 +120,9 @@
   <data name="Hello" xml:space="preserve">
     <value>Hello</value>
   </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Login Successful!</value>
+  </data>
   <data name="MistmatchingCredentialsExceptionMessage" xml:space="preserve">
     <value>Login Failed! Make sure your Username and Password match!</value>
   </data>
