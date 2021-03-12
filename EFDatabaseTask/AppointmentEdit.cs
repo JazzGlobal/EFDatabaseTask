@@ -14,7 +14,6 @@ namespace EFDatabaseTask
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            // OnDateValidated += ValidateFurther;
         }
         private U07lyXEntities dbcontext = new U07lyXEntities();
         private void AppointmentEdit_Load(object sender, EventArgs e)
@@ -65,9 +64,6 @@ namespace EFDatabaseTask
 
         private void appointmentDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            // TODO: Add validation logic to prevent appointments being made outside of business hours. 
-            // TODO: Add validation logic to prevent appointments from overlapping eachother.
-
             string columnName = "";
             switch (e.ColumnIndex)
             {
