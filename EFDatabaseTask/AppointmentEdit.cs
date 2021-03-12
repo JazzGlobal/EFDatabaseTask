@@ -246,6 +246,7 @@ namespace EFDatabaseTask
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     bothFieldsValidated = false;
                 }
 
@@ -262,7 +263,7 @@ namespace EFDatabaseTask
                     {
                         ValidateFailed(e.RowIndex, e.ColumnIndex);
                         string errorMessage = "Start time must be before end time.";
-                        Logger.Log.LogEvent("Error_Log.txt", errorMessage);
+                        Logger.Log.LogEvent("Error_Log.txt", ex + errorMessage);
                         MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     ValidateTimes(e.RowIndex, e.ColumnIndex);
