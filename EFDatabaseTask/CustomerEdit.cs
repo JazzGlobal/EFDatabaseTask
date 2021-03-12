@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -41,6 +42,13 @@ namespace EFDatabaseTask
             try
             {
                 dbcontext.SaveChanges();
+            }
+            catch(DbUpdateException dbUpdateEx)
+            {
+                Console.WriteLine(dbUpdateEx);
+                string errorMessage = $"Could not delete customer record, it is associated with other records (appointments, etc)";
+                MessageBox.Show(errorMessage,"Database Update Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Logger.Log.LogEvent("Error_Log.txt", errorMessage);
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
