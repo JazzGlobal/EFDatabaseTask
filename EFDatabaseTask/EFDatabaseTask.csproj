@@ -157,6 +157,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.fr-FR.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReportData.cs" />
     <EmbeddedResource Include="AddressEdit.resx">
       <DependentUpon>AddressEdit.cs</DependentUpon>
     </EmbeddedResource>
