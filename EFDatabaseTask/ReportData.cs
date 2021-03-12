@@ -41,8 +41,8 @@ namespace EFDatabaseTask
                               apps.start.Month,
                               apps.start.Year
                           };
-            var grouped = results.GroupBy(a => new {a.Year, a.Month}); // Get distinct types grouped by year -> month
-            foreach(var item in grouped)
+            var grouped = results.GroupBy(a => new { a.Year, a.Month }); // Get distinct types grouped by year -> month
+            foreach (var item in grouped)
             {
                 list.Add((item.Count(), item.First().Month, item.First().Year));
             }

@@ -1,12 +1,8 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EFDatabaseTask
@@ -31,7 +27,7 @@ namespace EFDatabaseTask
 
             string returnString = "";
 
-            foreach(user user in users)
+            foreach (user user in users)
             {
                 string userFormattedString = seperator;
                 List<appointment> apps = reportData.GetUserAppointments(user);
@@ -48,7 +44,7 @@ namespace EFDatabaseTask
         {
             // return $"Unique Report Types: {reportData.GetUniqueAppointmentTypes()}";
             string appointmentFormattedString = seperator;
-            foreach(var item in reportData.GetUniqueAppointmentTypes())
+            foreach (var item in reportData.GetUniqueAppointmentTypes())
             {
                 appointmentFormattedString += $"Unique Types For { new DateTime(item.Item3, item.Item2, 1, 0, 0, 0).ToString("yyyy MMMM")}: {item.Item1}";
                 appointmentFormattedString += seperator;
