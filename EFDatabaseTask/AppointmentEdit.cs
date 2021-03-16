@@ -29,6 +29,7 @@ namespace EFDatabaseTask
             try
             {
                 SaveAppointmentChanges();
+                MessageBox.Show("Records have been updated successfully.", "Database Change Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (InvalidDatabaseItemsException invDBEx)
             {
