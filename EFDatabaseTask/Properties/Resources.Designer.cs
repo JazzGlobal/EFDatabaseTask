@@ -70,11 +70,47 @@ namespace EFDatabaseTask.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginButtonText {
+            get {
+                return ResourceManager.GetString("LoginButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string LoginPasswordLabel {
+            get {
+                return ResourceManager.GetString("LoginPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login Successful!.
         /// </summary>
         internal static string LoginSuccess {
             get {
                 return ResourceManager.GetString("LoginSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginTitle {
+            get {
+                return ResourceManager.GetString("LoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string LoginUsernameLabel {
+            get {
+                return ResourceManager.GetString("LoginUsernameLabel", resourceCulture);
             }
         }
         

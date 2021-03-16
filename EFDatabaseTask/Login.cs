@@ -27,19 +27,19 @@ namespace EFDatabaseTask
             login();
         }
 
-        public static void SwitchExceptionLanguage(string s)
+        public static void SwitchLanguage(string s)
         {
             if (s.Split('-')[0].Contains("fr"))
             {
                 Console.WriteLine("Changing Culture to fr-FR");
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
+                Console.WriteLine("Switched To French");
             }
         }
 
         private void login()
         {
-            SwitchExceptionLanguage(Thread.CurrentThread.CurrentCulture.Name);
             string attemptedUsername = usernameTextBox.Text;
             string attemptedPassword = passwordTextBox.Text;
             try
@@ -78,6 +78,15 @@ namespace EFDatabaseTask
                 MessageBox.Show(e.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.Log.LogEvent("Login_Log.txt", e.Message);
             }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            SwitchLanguage(Thread.CurrentThread.CurrentCulture.Name);
+            usernameLabel.Text = Properties.Resources.LoginUsernameLabel;
+            passwordLabel.Text = Properties.Resources.LoginPasswordLabel;
+            this.Text = Properties.Resources.LoginTitle;
+            loginButton.Text = Properties.Resources.LoginButtonText;
         }
     }
 

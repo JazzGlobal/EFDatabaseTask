@@ -120,8 +120,20 @@
   <data name="Hello" xml:space="preserve">
     <value>Bonjour</value>
   </data>
+  <data name="LoginButtonText" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LoginPasswordLabel" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
   <data name="LoginSuccess" xml:space="preserve">
     <value>Connexion réussie!</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LoginUsernameLabel" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
   </data>
   <data name="MistmatchingCredentialsExceptionMessage" xml:space="preserve">
     <value>Échec de la connexion! Assurez-vous que votre nom d'utilisateur et votre mot de passe correspondent!</value>
