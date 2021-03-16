@@ -41,6 +41,7 @@ namespace EFDatabaseTask
             try
             {
                 dbcontext.SaveChanges();
+                MessageBox.Show("Records have been updated successfully.", "Database Change Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(DbUpdateException dbUpdateEx)
             {
