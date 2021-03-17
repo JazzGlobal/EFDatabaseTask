@@ -31,9 +31,11 @@ namespace EFDatabaseTask
         public List<CalendarEvent> LoadEvents()
         {
             List<CalendarEvent> events = new List<CalendarEvent>();
-            var appointmentList = dbcontext.appointments.Where(appointment => appointment.user.userName == Login.CurrentLoggedInUser.userName).ToList();
-            foreach (appointment app in appointmentList)
+            var appointmentListInUTC = dbcontext.appointments.Where(appointment => appointment.user.userName == Login.CurrentLoggedInUser.userName).ToList();
+            foreach (appointment app in appointmentListInUTC)
             {
+                app.start = app.start.ToLocalTime();
+                app.end = app.end.ToLocalTime();
                 events.Add(new CalendarEvent(app));
             }
             return events;
