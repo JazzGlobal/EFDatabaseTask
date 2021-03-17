@@ -19,13 +19,21 @@ namespace EFDatabaseTask
         public List<appointment> GetUserAppointments(Model.user user)
         {
             // Return all appointments from current day onward, ordered by appointment start. This makes iterating in the reports easier.
-            return dbcontext.appointments
+            List<appointment> utcApps = dbcontext.appointments
                 .Where(appointment =>
             appointment.user.userName == user.userName
             && appointment.start.Month == DateTime.Now.Month
             && appointment.start.Day >= DateTime.Now.Day)
                 .OrderBy(appointment => appointment.start)
                 .ToList();
+
+            foreach(appointment app in utcApps)
+            {
+                app.start = app.start.ToLocalTime();
+                app.end = app.end.ToLocalTime();
+            }
+            Console.WriteLine(utcApps.Count());
+            return utcApps;
         }
         public List<customer> GetAllActiveCustomers()
         {
