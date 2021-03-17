@@ -120,7 +120,7 @@ namespace EFDatabaseTask
         private void ValidateTimes(DataGridViewCellValidatingEventArgs e)
         {
             try
-            {
+            { 
                 DateTime newAppTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
                 if (newAppTime.Hour < MainForm.StartBusinessHours.Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
                 {
@@ -271,6 +271,31 @@ namespace EFDatabaseTask
         private void ValidateFailed(int rowIndex, int columnIndex)
         {
             appointmentDataGridView.Rows[rowIndex].Cells[columnIndex].Value = "";
+        }
+
+        private void appointmentDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.ColumnIndex == 9 || e.ColumnIndex == 10)
+            {
+                try
+                {
+                    if (e.Value != null)
+                    {
+                        Console.WriteLine(e.Value);
+                        DateTime dtValue;
+                        DateTime.TryParse(e.Value.ToString(), out dtValue);
+                        Console.WriteLine(dtValue);
+                        DateTime dtToLocal = dtValue.ToLocalTime();
+                        e.Value = dtToLocal;
+                        Console.WriteLine(e.Value);
+                    }
+
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+            }
         }
     }
 }

@@ -229,6 +229,7 @@ namespace EFDatabaseTask
             this.appointmentDataGridView.Name = "appointmentDataGridView";
             this.appointmentDataGridView.Size = new System.Drawing.Size(494, 295);
             this.appointmentDataGridView.TabIndex = 1;
+            this.appointmentDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.appointmentDataGridView_CellFormatting);
             this.appointmentDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.appointmentDataGridView_CellValidated);
             this.appointmentDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appointmentDataGridView_CellValidating);
             // 
