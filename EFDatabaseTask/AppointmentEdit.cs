@@ -18,10 +18,7 @@ namespace EFDatabaseTask
         private U07lyXEntities dbcontext = new U07lyXEntities();
         private void AppointmentEdit_Load(object sender, EventArgs e)
         {
-            dbcontext.appointments.OrderBy(appointment => appointment.appointmentId).Load();
-            dbcontext.customers.OrderBy(customer => customer.customerId).Load();
-            appointmentBindingSource.DataSource = dbcontext.appointments.Local;
-            customerBindingSource1.DataSource = dbcontext.customers.Local;
+            RefreshDataGridData();
         }
 
         private void appointmentBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -40,7 +37,23 @@ namespace EFDatabaseTask
         {
             try
             {
+                for(int i = 0; i < appointmentDataGridView.Rows.Count; i++)
+                {
+                    if(appointmentDataGridView.Rows[i].Cells[9].Value != null)
+                    {
+                        DateTime toUTC = TimeZoneInfo.ConvertTimeToUtc((DateTime)appointmentDataGridView.Rows[i].Cells[9].Value, TimeZoneInfo.Local);
+                        Console.WriteLine(appointmentDataGridView.Rows[i].Cells[9].Value);
+                        appointmentDataGridView.Rows[i].Cells[9].Value = toUTC;
+                    }
+                    if (appointmentDataGridView.Rows[i].Cells[10].Value != null)
+                    {
+                        DateTime toUTC = TimeZoneInfo.ConvertTimeToUtc((DateTime)appointmentDataGridView.Rows[i].Cells[10].Value, TimeZoneInfo.Local);
+                        Console.WriteLine(appointmentDataGridView.Rows[i].Cells[10].Value);
+                        appointmentDataGridView.Rows[i].Cells[10].Value = toUTC;
+                    }
+                }
                 dbcontext.SaveChanges();
+                RefreshDataGridData();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
@@ -120,7 +133,7 @@ namespace EFDatabaseTask
         private void ValidateTimes(DataGridViewCellValidatingEventArgs e)
         {
             try
-            { 
+            {
                 DateTime newAppTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
                 if (newAppTime.Hour < MainForm.StartBusinessHours.Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
                 {
@@ -281,13 +294,13 @@ namespace EFDatabaseTask
                 {
                     if (e.Value != null)
                     {
-                        Console.WriteLine(e.Value);
+                        /*Console.WriteLine(e.Value);
                         DateTime dtValue;
                         DateTime.TryParse(e.Value.ToString(), out dtValue);
                         Console.WriteLine(dtValue);
                         DateTime dtToLocal = dtValue.ToLocalTime();
                         e.Value = dtToLocal;
-                        Console.WriteLine(e.Value);
+                        Console.WriteLine(e.Value);*/
                     }
 
                 } catch (Exception ex)
@@ -296,6 +309,19 @@ namespace EFDatabaseTask
                 }
 
             }
+        }
+        private void RefreshDataGridData()
+        {
+            var appointmentList = dbcontext.appointments.OrderBy(appointment => appointment.appointmentId);
+            foreach (var app in appointmentList)
+            {
+                app.start = app.start.ToLocalTime();
+                app.end = app.end.ToLocalTime();
+            }
+            appointmentList.Load();
+            dbcontext.customers.OrderBy(customer => customer.customerId).Load();
+            appointmentBindingSource.DataSource = dbcontext.appointments.Local;
+            customerBindingSource1.DataSource = dbcontext.customers.Local;
         }
     }
 }
