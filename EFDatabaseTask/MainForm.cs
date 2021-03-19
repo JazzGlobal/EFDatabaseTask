@@ -11,8 +11,9 @@ namespace EFDatabaseTask
     public partial class MainForm : Form
     {
         // Set business hours for error checking comparisons. Users cannot currently configure this.
-        public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 8, 0, 0).ToUniversalTime();
-        public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 17, 0, 0).ToUniversalTime();
+        public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 21, 0, 0, DateTimeKind.Utc);
+
 
         System.Windows.Forms.Timer timer;
         List<CalendarEvent> calendarEvents;
