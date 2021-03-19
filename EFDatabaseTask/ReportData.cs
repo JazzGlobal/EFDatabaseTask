@@ -62,7 +62,25 @@ namespace EFDatabaseTask
             foreach (var item in grouped)
             {
                 list.Add((item.Distinct().Count(), item.First().Month, item.First().Year));
-                
+                Console.WriteLine(item);
+            }
+            return list;
+        }
+        public List<(string, int)> GetAppointmentTypes()
+        {
+            List<(string, int)> list = new List<(string, int)>();
+            var results = from apps in dbcontext.appointments
+                          select new
+                          {
+                              apps.type,
+                              apps.start.Month,
+                              apps.start.Year
+                          };
+            // Lambda Usage: Used to properly group the query results into a readable format for the report.
+            var grouped = results.GroupBy(a => new { a.type }); // Get distinct types grouped by year -> month
+            foreach (var item in grouped)
+            {
+                list.Add((item.First().type, item.Count()));
             }
             return list;
         }

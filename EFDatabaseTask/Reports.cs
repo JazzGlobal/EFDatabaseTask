@@ -44,9 +44,10 @@ namespace EFDatabaseTask
         {
             // return $"Unique Report Types: {reportData.GetUniqueAppointmentTypes()}";
             string appointmentFormattedString = seperator;
-            foreach (var item in reportData.GetUniqueAppointmentTypes())
+            foreach (var item in reportData.GetAppointmentTypes())
             {
-                appointmentFormattedString += $"Unique Types For { new DateTime(item.Item3, item.Item2, 1, 0, 0, 0).ToString("yyyy MMMM")}: {item.Item1}";
+                // appointmentFormattedString += $"Unique Types For { new DateTime(item.Item3, item.Item2, 1, 0, 0, 0).ToString("yyyy MMMM")}: {item.Item1}";
+                appointmentFormattedString += $"Appointment Type Overview: \nType: {item.Item1}\n# Of: {item.Item2}";
                 appointmentFormattedString += seperator;
             }
             return appointmentFormattedString;
