@@ -11,9 +11,11 @@ namespace EFDatabaseTask
     public partial class MainForm : Form
     {
         // Set business hours for error checking comparisons. Users cannot currently configure this.
-        public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 12, 0, 0, DateTimeKind.Utc);
-        public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 21, 0, 0, DateTimeKind.Utc);
+        // public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        // public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 21, 0, 0, DateTimeKind.Utc);
 
+        public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 23, 0, 0, DateTimeKind.Utc);
 
         System.Windows.Forms.Timer timer;
         List<CalendarEvent> calendarEvents;
@@ -75,11 +77,10 @@ namespace EFDatabaseTask
         }
         public void ShowDataForm()
         {
-            timer = new System.Windows.Forms.Timer();
+            /* timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = 60000;
-            timer.Start();
-
+            timer.Start(); */
             DataEditHub dataEditHub = new DataEditHub();
             dataEditHub.MdiParent = this;
             dataEditHub.Show();

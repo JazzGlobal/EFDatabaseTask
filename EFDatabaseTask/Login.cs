@@ -1,6 +1,7 @@
 ﻿using EFDatabaseTask.DataFormExceptions;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Globalization;
@@ -38,6 +39,29 @@ namespace EFDatabaseTask
             }
         }
 
+        private void CheckForEvents()
+        {
+            List<CalendarEvent> calendarEvents = new List<CalendarEvent>();
+            var appointments = from app in dbcontext.appointments // Get appointments that will occur today and have not yet occurred and belong to the logged in user.
+                    where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day && app.user.userName == Login.CurrentLoggedInUser.userName
+                    select app;
+
+            foreach (appointment app in appointments)
+            {
+                if (app.start >= DateTime.Now)
+                {
+                    TimeSpan ts = app.start.ToLocalTime() - DateTime.Now;
+                    if (ts.TotalMinutes <= 15 && ts.TotalMinutes >= 0)
+                    {
+                        Console.WriteLine(ts.TotalMinutes);
+                        string messageText = $"{app.title}: in {decimal.Round((decimal) ts.TotalMinutes)} minutes.";
+                        Console.WriteLine(messageText);
+                        MessageBox.Show(messageText, "Meeting Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
         private void login()
         {
             string attemptedUsername = usernameTextBox.Text;
@@ -66,6 +90,7 @@ namespace EFDatabaseTask
                         Logger.Log.LogEvent("Login_Log.txt", $"{success} for {attemptedUsername}");
                         CurrentLoggedInUser = user;
                         Close();
+                        CheckForEvents();
                         mainForm.ShowDataForm();
                         return;
                     }
