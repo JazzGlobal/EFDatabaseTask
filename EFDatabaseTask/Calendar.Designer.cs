@@ -40,7 +40,7 @@ namespace EFDatabaseTask
             this.eventResultBox.Location = new System.Drawing.Point(258, 18);
             this.eventResultBox.Name = "eventResultBox";
             this.eventResultBox.ReadOnly = true;
-            this.eventResultBox.Size = new System.Drawing.Size(232, 162);
+            this.eventResultBox.Size = new System.Drawing.Size(308, 194);
             this.eventResultBox.TabIndex = 1;
             this.eventResultBox.Text = "";
             // 
@@ -73,7 +73,7 @@ namespace EFDatabaseTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 224);
+            this.ClientSize = new System.Drawing.Size(578, 224);
             this.Controls.Add(this.timePeriodSelection);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.viewButton);

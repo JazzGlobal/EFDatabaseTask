@@ -62,11 +62,13 @@ namespace EFDatabaseTask
         }
         private void viewButton_Click(object sender, EventArgs e)
         {
+            string seperator = "==============";
             List<appointment> apps = GetAppointments(dateTimePicker.Value, (AppointmentLookupType) timePeriodSelection.SelectedItem);
             eventResultBox.Text = "";
             foreach (var app in apps)
             {
-                eventResultBox.Text += $"{app.start} - {app.end}\n";
+                eventResultBox.Text += $"{app.title} - {app.description}\n{app.start.ToLocalTime()} - {app.end.ToLocalTime()}\n";
+                eventResultBox.Text += seperator + "\n";
             }
         }
     }
