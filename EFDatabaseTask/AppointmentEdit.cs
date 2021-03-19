@@ -171,6 +171,8 @@ namespace EFDatabaseTask
                 DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(MainForm.StartBusinessHours,TimeZoneInfo.Local);
                 DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(MainForm.EndBusinessHours, TimeZoneInfo.Local);
 
+                localEnd = localEnd.AddHours(-1);
+
                 string errorMessage = $"Cannot schedule start or end time of appointment outside of business hours \n Business Hours (Local Time): " +
                     $"{localStart.ToString("hh:mm tt", CultureInfo.InvariantCulture)} - {localEnd.ToString("hh:mm tt", CultureInfo.InvariantCulture)}";
                 Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);
