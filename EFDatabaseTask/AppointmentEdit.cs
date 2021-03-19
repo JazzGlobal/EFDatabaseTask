@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -134,8 +135,8 @@ namespace EFDatabaseTask
         {
             try
             {
-                DateTime newAppTime = DateTime.Parse(e.FormattedValue.ToString()).ToUniversalTime();
-                if (newAppTime.Hour < MainForm.StartBusinessHours.Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.Hour - 1))
+                DateTime newAppTime = DateTime.Parse(e.FormattedValue.ToString());
+                if (newAppTime.Hour < MainForm.StartBusinessHours.ToLocalTime().Hour || newAppTime.Hour >= (MainForm.EndBusinessHours.ToLocalTime().Hour - 1))
                 {
                     throw new ScheduledAppointmentOutsideOfBusinessHoursException();
                 }
@@ -154,7 +155,7 @@ namespace EFDatabaseTask
                      * (Checking same row will always result in an error.)
                      */
                     {
-                        if (app.start.ToUniversalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToUniversalTime().TimeOfDay)
+                        if (app.start.ToLocalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToLocalTime().TimeOfDay)
                         /*
                          * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
                          */
@@ -167,8 +168,11 @@ namespace EFDatabaseTask
             catch (ScheduledAppointmentOutsideOfBusinessHoursException outsideHoursEx)
             {
                 ValidateFailed(e.RowIndex, e.ColumnIndex);
-                string errorMessage = $"Cannot schedule start or end time of appointment outside of business hours \n Business Hours: " +
-                    $"{MainForm.StartBusinessHours.ToLocalTime().Hour}:00 - {MainForm.EndBusinessHours.ToLocalTime().Hour - 1}:00";
+                DateTime localStart = TimeZoneInfo.ConvertTimeFromUtc(MainForm.StartBusinessHours,TimeZoneInfo.Local);
+                DateTime localEnd = TimeZoneInfo.ConvertTimeFromUtc(MainForm.EndBusinessHours, TimeZoneInfo.Local);
+
+                string errorMessage = $"Cannot schedule start or end time of appointment outside of business hours \n Business Hours (Local Time): " +
+                    $"{localStart.ToString("hh:mm tt", CultureInfo.InvariantCulture)} - {localEnd.ToString("hh:mm tt", CultureInfo.InvariantCulture)}";
                 Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);
                 MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
