@@ -17,8 +17,6 @@ namespace EFDatabaseTask
         public static DateTime StartBusinessHours = new DateTime(2021, 1, 1, 12, 0, 0, DateTimeKind.Utc);
         public static DateTime EndBusinessHours = new DateTime(2021, 1, 1, 23, 0, 0, DateTimeKind.Utc);
 
-        System.Windows.Forms.Timer timer;
-        List<CalendarEvent> calendarEvents;
         public MainForm()
         {
             InitializeComponent();
@@ -35,7 +33,6 @@ namespace EFDatabaseTask
         }
         private void CheckForEvents()
         {
-            calendarEvents = new List<CalendarEvent>();
             var a = from app in dbcontext.appointments // Get appointments that will occur today and have not yet occurred. 
                     where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day
                     select app;

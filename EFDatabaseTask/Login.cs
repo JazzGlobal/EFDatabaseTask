@@ -41,7 +41,6 @@ namespace EFDatabaseTask
 
         private void CheckForEvents()
         {
-            List<CalendarEvent> calendarEvents = new List<CalendarEvent>();
             var appointments = from app in dbcontext.appointments // Get appointments that will occur today and have not yet occurred and belong to the logged in user.
                     where app.start.Month == DateTime.Now.Month && app.start.Day == DateTime.Now.Day && app.user.userName == Login.CurrentLoggedInUser.userName
                     select app;

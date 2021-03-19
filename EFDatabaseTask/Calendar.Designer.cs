@@ -29,17 +29,11 @@ namespace EFDatabaseTask
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.eventResultBox = new System.Windows.Forms.RichTextBox();
+            this.viewButton = new System.Windows.Forms.Button();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.timePeriodSelection = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(18, 18);
-            this.monthCalendar1.MaxSelectionCount = 1;
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // eventResultBox
             // 
@@ -50,13 +44,40 @@ namespace EFDatabaseTask
             this.eventResultBox.TabIndex = 1;
             this.eventResultBox.Text = "";
             // 
+            // viewButton
+            // 
+            this.viewButton.Location = new System.Drawing.Point(138, 71);
+            this.viewButton.Name = "viewButton";
+            this.viewButton.Size = new System.Drawing.Size(75, 23);
+            this.viewButton.TabIndex = 2;
+            this.viewButton.Text = "View";
+            this.viewButton.UseVisualStyleBackColor = true;
+            this.viewButton.Click += new System.EventHandler(this.viewButton_Click);
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Location = new System.Drawing.Point(13, 18);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker.TabIndex = 3;
+            // 
+            // timePeriodSelection
+            // 
+            this.timePeriodSelection.FormattingEnabled = true;
+            this.timePeriodSelection.Location = new System.Drawing.Point(13, 44);
+            this.timePeriodSelection.Name = "timePeriodSelection";
+            this.timePeriodSelection.Size = new System.Drawing.Size(200, 21);
+            this.timePeriodSelection.TabIndex = 4;
+            // 
             // Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 224);
+            this.Controls.Add(this.timePeriodSelection);
+            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.viewButton);
             this.Controls.Add(this.eventResultBox);
-            this.Controls.Add(this.monthCalendar1);
             this.Name = "Calendar";
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.Calendar_Load);
@@ -65,8 +86,9 @@ namespace EFDatabaseTask
         }
 
         #endregion
-
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.RichTextBox eventResultBox;
+        private System.Windows.Forms.Button viewButton;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.ComboBox timePeriodSelection;
     }
 }

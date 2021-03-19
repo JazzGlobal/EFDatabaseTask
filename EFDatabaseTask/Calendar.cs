@@ -9,7 +9,6 @@ namespace EFDatabaseTask
 {
     public partial class Calendar : Form
     {
-        public List<CalendarEvent> calendarEvents;
         public Calendar()
         {
             InitializeComponent();
@@ -18,64 +17,57 @@ namespace EFDatabaseTask
 
         private void Calendar_Load(object sender, EventArgs e)
         {
-            calendarEvents = LoadEvents(); // Query the database for all appointments for the currently logged in user.
-
-            foreach (CalendarEvent c_event in calendarEvents)
-            {
-                monthCalendar1.AddBoldedDate(c_event.startDate);
-            }
-            monthCalendar1.UpdateBoldedDates(); // Shade the days accordingly. 
-            monthCalendar1.SetSelectionRange(DateTime.Now, DateTime.Now);
-
+            timePeriodSelection.Items.Add(AppointmentLookupType.Day);
+            timePeriodSelection.Items.Add(AppointmentLookupType.Week);
+            timePeriodSelection.Items.Add(AppointmentLookupType.Month);
+            timePeriodSelection.SelectedIndex = 0;
         }
-        public List<CalendarEvent> LoadEvents()
+        enum AppointmentLookupType
         {
-            List<CalendarEvent> events = new List<CalendarEvent>();
-            var appointmentListInUTC = dbcontext.appointments.Where(appointment => appointment.user.userName == Login.CurrentLoggedInUser.userName).ToList();
-            foreach (appointment app in appointmentListInUTC)
-            {
-                app.start = app.start.ToLocalTime();
-                app.end = app.end.ToLocalTime();
-                events.Add(new CalendarEvent(app));
-            }
-            return events;
+            Day = 0,
+            Week = 1, 
+            Month = 2
         }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private List<appointment> GetAppointments (DateTime dt_obj, AppointmentLookupType a_type)
         {
-            var selectedDateEvents = from c_event in calendarEvents
-                                     where c_event.startDate.ToString().Substring(0, 9) == e.Start.ToString().Substring(0, 9)
-                                     select c_event;
+            var startDayOfWeek = DayOfWeek.Monday; 
+            List<appointment> appointments = new List<appointment>();
+            switch(a_type)
+            {
+                case AppointmentLookupType.Day:
+                    appointments = (from app in dbcontext.appointments
+                                    where app.start.Month == dt_obj.Month && app.start.Day >= dt_obj.Day
+                                     && app.end.Month == dt_obj.Month && app.end.Day <= dt_obj.Day 
+                                     && app.start.Year == dt_obj.Year
+                                    select app).ToList();
+                    break;
+                case AppointmentLookupType.Week:
+                    int diff = (7 + (dt_obj.DayOfWeek - startDayOfWeek)) % 7;
+                    DateTime startOfWeekDtObj = dt_obj.AddDays(-1 * diff);
+                    DateTime endOfWeekDtObj = dt_obj.AddDays(7);
+                    appointments = (from app in dbcontext.appointments
+                                    where app.start.Month == startOfWeekDtObj.Month && app.start.Day >= startOfWeekDtObj.Day  
+                                    && app.end.Month == endOfWeekDtObj.Month && app.end.Day <= endOfWeekDtObj.Day
+                                    && app.start.Year == startOfWeekDtObj.Year && app.end.Year == endOfWeekDtObj.Year
+                                    select app).ToList();
+                    break;
+                case AppointmentLookupType.Month:
+                     appointments = (from app in dbcontext.appointments
+                                        where app.start.Month == dt_obj.Month  && app.start.Year == dt_obj.Year
+                                        select app).ToList();
+                    break; 
+            }
+            appointments = appointments.OrderBy(appointment => appointment.start).ToList();
+            return appointments;
+        }
+        private void viewButton_Click(object sender, EventArgs e)
+        {
+            List<appointment> apps = GetAppointments(dateTimePicker.Value, (AppointmentLookupType) timePeriodSelection.SelectedItem);
             eventResultBox.Text = "";
-            if (selectedDateEvents.Count() > 0)
+            foreach (var app in apps)
             {
-                foreach (CalendarEvent c_event in selectedDateEvents)
-                {
-                    // Populate RichEditText box with event data.
-                    eventResultBox.Text += $"Title: {c_event.title}\nCustomer Name: {c_event.customerName}\nStart: {c_event.startDate}\nEnd: {c_event.endDate}\nDescription: {c_event.description}\n\n";
-                }
+                eventResultBox.Text += $"{app.start} - {app.end}\n";
             }
-            else
-            {
-                eventResultBox.Text = $"No scheduled events for {e.Start.ToString().Substring(0, 9)}.";
-            }
-        }
-    }
-    public class CalendarEvent
-    {
-        public string customerName { get; }
-        public string title { get; }
-        public string description { get; }
-        public DateTime startDate { get; }
-        public DateTime endDate { get; }
-
-        public CalendarEvent(Model.appointment appointment)
-        {
-            customerName = appointment.customer.customerName;
-            title = appointment.title;
-            description = appointment.description;
-            startDate = appointment.start;
-            endDate = appointment.end;
         }
     }
 }
