@@ -66,10 +66,11 @@ namespace EFDatabaseTask
             }
             return list;
         }
-        public List<(string, int)> GetAppointmentTypes()
+        public List<(string, int)> GetAppointmentTypes(DateTime monthSelected)
         {
             List<(string, int)> list = new List<(string, int)>();
             var results = from apps in dbcontext.appointments
+                          where apps.start.Month == monthSelected.Month && apps.start.Year == monthSelected.Year
                           select new
                           {
                               apps.type,

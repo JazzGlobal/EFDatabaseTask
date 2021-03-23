@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -43,11 +44,11 @@ namespace EFDatabaseTask
         private string GenerateUniqueAppointmentType()
         {
             // return $"Unique Report Types: {reportData.GetUniqueAppointmentTypes()}";
-            string appointmentFormattedString = seperator;
-            foreach (var item in reportData.GetAppointmentTypes())
+            string appointmentFormattedString = $"Showing Appointments For {dateTimePickerUniqueTypes.Value.ToString("MMMM, yyyy", CultureInfo.InvariantCulture)}" + seperator;
+            foreach (var item in reportData.GetAppointmentTypes(dateTimePickerUniqueTypes.Value))
             {
-                // appointmentFormattedString += $"Unique Types For { new DateTime(item.Item3, item.Item2, 1, 0, 0, 0).ToString("yyyy MMMM")}: {item.Item1}";
-                appointmentFormattedString += $"Appointment Type Overview: \nType: {item.Item1}\n# Of: {item.Item2}";
+                //appointmentFormattedString += $"Unique Types For { new DateTime(item.Item3, item.Item2, 1, 0, 0, 0).ToString("yyyy MMMM")}: {item.Item1}";
+                appointmentFormattedString += $"Type: {item.Item1}\n# Of: {item.Item2}";
                 appointmentFormattedString += seperator;
             }
             return appointmentFormattedString;
@@ -55,7 +56,8 @@ namespace EFDatabaseTask
         private string GenerateActiveCustomers()
         {
             List<customer> customerList = reportData.GetAllActiveCustomers();
-            string customerFormattedString = seperator;
+            string customerFormattedString = "Showing Active Customers:" + seperator;
+
             foreach(customer customer in customerList)
             {
                 customerFormattedString += $"{customer.customerName}\n";
@@ -85,6 +87,18 @@ namespace EFDatabaseTask
                 case 2:
                     reportOutputRichEditTextbox.Text = GenerateActiveCustomers();
                     break;
+            }
+        }
+
+        private void reportTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(reportTypeComboBox.SelectedIndex == 1)
+            {
+                // display control
+                dateTimePickerUniqueTypes.Visible = true;
+            } else
+            {
+                dateTimePickerUniqueTypes.Visible = false;
             }
         }
     }

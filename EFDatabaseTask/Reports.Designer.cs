@@ -33,6 +33,7 @@ namespace EFDatabaseTask
             this.reportTypeLabel = new System.Windows.Forms.Label();
             this.generateReportButton = new System.Windows.Forms.Button();
             this.reportOutputRichEditTextbox = new System.Windows.Forms.RichTextBox();
+            this.dateTimePickerUniqueTypes = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // reportTypeComboBox
@@ -40,8 +41,9 @@ namespace EFDatabaseTask
             this.reportTypeComboBox.FormattingEnabled = true;
             this.reportTypeComboBox.Location = new System.Drawing.Point(12, 25);
             this.reportTypeComboBox.Name = "reportTypeComboBox";
-            this.reportTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.reportTypeComboBox.Size = new System.Drawing.Size(156, 21);
             this.reportTypeComboBox.TabIndex = 0;
+            this.reportTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.reportTypeComboBox_SelectedIndexChanged);
             // 
             // reportTypeLabel
             // 
@@ -56,7 +58,7 @@ namespace EFDatabaseTask
             // 
             this.generateReportButton.Location = new System.Drawing.Point(58, 52);
             this.generateReportButton.Name = "generateReportButton";
-            this.generateReportButton.Size = new System.Drawing.Size(75, 23);
+            this.generateReportButton.Size = new System.Drawing.Size(110, 23);
             this.generateReportButton.TabIndex = 2;
             this.generateReportButton.Text = "Generate";
             this.generateReportButton.UseVisualStyleBackColor = true;
@@ -64,17 +66,25 @@ namespace EFDatabaseTask
             // 
             // reportOutputRichEditTextbox
             // 
-            this.reportOutputRichEditTextbox.Location = new System.Drawing.Point(139, 13);
+            this.reportOutputRichEditTextbox.Location = new System.Drawing.Point(174, 13);
             this.reportOutputRichEditTextbox.Name = "reportOutputRichEditTextbox";
-            this.reportOutputRichEditTextbox.Size = new System.Drawing.Size(332, 179);
+            this.reportOutputRichEditTextbox.Size = new System.Drawing.Size(369, 212);
             this.reportOutputRichEditTextbox.TabIndex = 5;
             this.reportOutputRichEditTextbox.Text = "";
+            // 
+            // dateTimePickerUniqueTypes
+            // 
+            this.dateTimePickerUniqueTypes.Location = new System.Drawing.Point(12, 81);
+            this.dateTimePickerUniqueTypes.Name = "dateTimePickerUniqueTypes";
+            this.dateTimePickerUniqueTypes.Size = new System.Drawing.Size(156, 20);
+            this.dateTimePickerUniqueTypes.TabIndex = 6;
             // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 204);
+            this.ClientSize = new System.Drawing.Size(555, 237);
+            this.Controls.Add(this.dateTimePickerUniqueTypes);
             this.Controls.Add(this.reportOutputRichEditTextbox);
             this.Controls.Add(this.generateReportButton);
             this.Controls.Add(this.reportTypeLabel);
@@ -93,5 +103,6 @@ namespace EFDatabaseTask
         private System.Windows.Forms.Label reportTypeLabel;
         private System.Windows.Forms.Button generateReportButton;
         private System.Windows.Forms.RichTextBox reportOutputRichEditTextbox;
+        private System.Windows.Forms.DateTimePicker dateTimePickerUniqueTypes;
     }
 }
