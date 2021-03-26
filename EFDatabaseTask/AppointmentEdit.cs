@@ -26,6 +26,10 @@ namespace EFDatabaseTask
         {
             try
             {
+               /* appointmentDataGridView.EndEdit();
+                DataGridViewCell currentCell = appointmentDataGridView.CurrentCell;
+                appointmentDataGridView.CurrentCell = null;
+                appointmentDataGridView.CurrentCell = currentCell; */
                 SaveAppointmentChanges();
                 MessageBox.Show("Records have been updated successfully.", "Database Change Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -87,7 +91,7 @@ namespace EFDatabaseTask
                     break;
                 case 1:
                     columnName = "customerId";
-
+                    
                     // Lambda expression below, used to make querying the customer database more efficient. We only need one customer.The customer is decided
                     // by which customerID the user attempts to enter.
                     var list = dbcontext.customers.Where(customer => customer.customerId.ToString() == e.FormattedValue.ToString()).AsEnumerable();
@@ -120,6 +124,7 @@ namespace EFDatabaseTask
                 case 9:
                     columnName = "start";
                     // ValidateStartTimes(e);
+                    // ValidateTimes(e);
                     ValidateTimes(e);
                     break;
                 case 10:
@@ -141,27 +146,74 @@ namespace EFDatabaseTask
                     throw new ScheduledAppointmentOutsideOfBusinessHoursException();
                 }
 
+                var user = (user)appointmentDataGridView.Rows[e.RowIndex].Cells[15].Value;
                 var appointments = from app in dbcontext.appointments // Query appointments that are the same month and day of the user entered appointment.
-                                   where app.user.userName == Login.CurrentLoggedInUser.userName
-                                   && app.start.Month == newAppTime.Month
+                                   where app.start.Month == newAppTime.Month
                                    && app.start.Day == newAppTime.Day
+                                   && app.start.Year == newAppTime.Year
                                    select app;
 
                 foreach (appointment app in appointments)
                 {
                     if (app.appointmentId.ToString() != appointmentDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString())
-                    /*
-                     * Do not check the app if the ID matches the validating rows ID 
-                     * (Checking same row will always result in an error.)
-                     */
+
                     {
+                        Console.WriteLine($"Compare 1:  {app.appointmentId}");
+                        Console.WriteLine(app.start.ToLocalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToLocalTime().TimeOfDay);
                         if (app.start.ToLocalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToLocalTime().TimeOfDay)
-                        /*
-                         * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
-                         */
+                        
                         {
                             throw new ScheduledAppointmentDuringAnotherAppointment();
                         }
+                    }
+                } 
+                if(RowTimesFilled(e))
+                {
+                    DateTime newAppStart;
+                    DateTime newAppEnd;
+                    if(e.ColumnIndex == 9)
+                    {
+                        newAppStart = DateTime.Parse(e.FormattedValue.ToString());
+                        newAppEnd = DateTime.Parse(appointmentDataGridView.Rows[e.RowIndex].Cells[10].FormattedValue.ToString());
+                    } else
+                    {
+                        newAppStart = DateTime.Parse(appointmentDataGridView.Rows[e.RowIndex].Cells[9].FormattedValue.ToString());
+                        newAppEnd = DateTime.Parse(e.FormattedValue.ToString());
+                    }
+                    foreach (appointment app in appointments)
+                    {
+                        if (app.appointmentId.ToString() != appointmentDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString())
+                        /*
+                         * Do not check the app if the ID matches the validating rows ID 
+                         * (Checking same row will always result in an error.)
+                         */
+                        {
+                            Console.WriteLine($"Compare 2:  {app.appointmentId}");
+                            Console.WriteLine("Comparing: {0} <= {1} && {2} <= {3}", newAppStart, app.end.ToLocalTime(), app.start.ToLocalTime(), newAppEnd);
+                            Console.WriteLine(newAppStart <= app.end.ToLocalTime() && app.start.ToLocalTime() <= newAppEnd);
+
+                                if (newAppStart <= app.end.ToLocalTime() && app.start.ToLocalTime() <= newAppEnd) 
+                            /*
+                             * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
+                             */
+                            {
+                                throw new ScheduledAppointmentDuringAnotherAppointment();
+                            }
+                        }
+                    }
+                    try
+                    {
+                        if (newAppStart.ToUniversalTime().TimeOfDay > newAppEnd.ToUniversalTime().TimeOfDay)
+                        {
+                            throw new StartTimeMustBeBeforeEndTimeException();
+                        }
+                    }
+                    catch (StartTimeMustBeBeforeEndTimeException ex)
+                    {
+                        ValidateFailed(e.RowIndex, e.ColumnIndex);
+                        string errorMessage = "Start time must be before end time.";
+                        Logger.Log.LogEvent("Error_Log.txt", ex + errorMessage);
+                        MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -177,6 +229,7 @@ namespace EFDatabaseTask
                     $"{localStart.ToString("hh:mm tt", CultureInfo.InvariantCulture)} - {localEnd.ToString("hh:mm tt", CultureInfo.InvariantCulture)}";
                 Logger.Log.LogEvent("Error_Log.txt", outsideHoursEx + errorMessage);
                 MessageBox.Show(errorMessage, "Scheduling Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch (ScheduledAppointmentDuringAnotherAppointment overlapEx)
             {
@@ -191,6 +244,30 @@ namespace EFDatabaseTask
                 Logger.Log.LogEvent("Error_Log.txt", $"Error Occurred During Validation of Appointment (start) :{general_ex.Message}");
             }
         }
+
+        private bool RowTimesFilled(DataGridViewCellValidatingEventArgs e)
+        {
+            try
+            {
+                DateTime result1;
+                DateTime result2;
+                if (DateTime.TryParse(appointmentDataGridView.Rows[e.RowIndex].Cells[9].Value.ToString(), out result1) && DateTime.TryParse(appointmentDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString(),out result2))
+                {
+                    Console.WriteLine("Both times are filled!");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+
+        }
+
         private void ValidateTimes(int rowIndex, int columnIndex)
         {
             try
@@ -215,7 +292,7 @@ namespace EFDatabaseTask
                      * (Checking same row will always result in an error.)
                      */
                     {
-                        if (app.start.ToUniversalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToUniversalTime().TimeOfDay)
+                        if (app.start.ToLocalTime().TimeOfDay <= newAppTime.TimeOfDay && newAppTime.TimeOfDay <= app.end.ToLocalTime().TimeOfDay)
                         /*
                          * Check if the validating row's start time falls within the comparison app's start and end time. If so, throw an error.
                          */
@@ -289,7 +366,7 @@ namespace EFDatabaseTask
         }
         private void ValidateFailed(int rowIndex, int columnIndex)
         {
-            appointmentDataGridView.Rows[rowIndex].Cells[columnIndex].Value = "";
+            appointmentDataGridView.RefreshEdit();
         }
 
         private void appointmentDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
