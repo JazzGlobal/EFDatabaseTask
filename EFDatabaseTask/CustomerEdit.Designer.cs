@@ -47,6 +47,7 @@ namespace EFDatabaseTask
             this.customerBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.customerDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.addressId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -194,6 +195,7 @@ namespace EFDatabaseTask
             this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customerDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
+            this.customerId,
             this.dataGridViewCheckBoxColumn1,
             this.addressId,
             this.dataGridViewTextBoxColumn4,
@@ -211,6 +213,13 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn2.DataPropertyName = "customerName";
             this.dataGridViewTextBoxColumn2.HeaderText = "customerName";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // customerId
+            // 
+            this.customerId.DataPropertyName = "customerId";
+            this.customerId.HeaderText = "customerId";
+            this.customerId.Name = "customerId";
+            this.customerId.ReadOnly = true;
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -288,6 +297,7 @@ namespace EFDatabaseTask
         private System.Windows.Forms.ToolStripButton customerBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView customerDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerId;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
