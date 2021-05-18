@@ -133,6 +133,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MySqlEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PET.cs">
+      <DependentUpon>MySqlEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="user.cs">
       <DependentUpon>MySqlEntities.tt</DependentUpon>

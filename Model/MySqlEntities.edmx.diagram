@@ -16,6 +16,8 @@
         <AssociationConnector Association="U07lyXModel.appointment_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="U07lyXModel.appointment_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="U07lyXModel.city_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="U07lyXModel.PET" Width="1.5" PointX="10.5" PointY="6.375" />
+        <AssociationConnector Association="U07lyXModel.PET_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

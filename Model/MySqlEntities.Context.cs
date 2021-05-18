@@ -31,5 +31,6 @@ namespace Model
         public virtual DbSet<country> countries { get; set; }
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<PET> PETs { get; set; }
     }
 }

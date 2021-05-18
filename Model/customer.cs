@@ -18,6 +18,7 @@ namespace Model
         public customer()
         {
             this.appointments = new HashSet<appointment>();
+            this.PETs = new HashSet<PET>();
         }
     
         public int customerId { get; set; }
@@ -32,5 +33,7 @@ namespace Model
         public virtual address address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<appointment> appointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PET> PETs { get; set; }
     }
 }
