@@ -78,5 +78,13 @@ namespace EFDatabaseTask.DataFormExceptions
 
         }
     }
+    [Serializable]
+    class PetNameCannotBeNullException : Exception
+    {
+        public PetNameCannotBeNullException() : base("Pet name field cannot be empty. Give your pet a name!")
+        {
+
+        }
+    }
 }
 
