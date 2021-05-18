@@ -70,5 +70,13 @@ namespace EFDatabaseTask.DataFormExceptions
 
         }
     }
+    [Serializable]
+    class CustomerIDNotFoundException : Exception
+    {
+        public CustomerIDNotFoundException(int customerId) : base($"Could not find CustomerID: {customerId}")
+        {
+
+        }
+    }
 }
 
