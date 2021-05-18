@@ -43,6 +43,14 @@ namespace EFDatabaseTask
                             select customer).ToList();
             return customerList;
         }
+        public List<PET> GetAllActivePets()
+        {
+            List<PET> petList = new List<PET>();
+            petList = (from pet in dbcontext.PETs
+                       where pet.ACTIVE == true
+                       select pet).ToList();
+            return petList;
+        }
         /// <summary>
         /// Returns list of (appointment types, month, and year).
         /// </summary>

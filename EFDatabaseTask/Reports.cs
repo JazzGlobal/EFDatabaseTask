@@ -64,11 +64,25 @@ namespace EFDatabaseTask
             }
             return customerFormattedString;
         }
+        
+        private string GenerateActivePets()
+        {
+            List<PET> petList = reportData.GetAllActivePets();
+            string petFormattedString = "Showing Active Pets: " + seperator;
+
+            foreach(PET pet in petList)
+            {
+                petFormattedString += $"{pet.PET_NAME}\n";
+            }
+            return petFormattedString;
+        }
+        
         private void Reports_Load(object sender, EventArgs e)
         {
             reportTypeComboBox.Items.Add("User Schedules");
             reportTypeComboBox.Items.Add("Unique Appointments");
             reportTypeComboBox.Items.Add("Active Customers");
+            reportTypeComboBox.Items.Add("Active Pets");
             reportTypeComboBox.SelectedIndex = 0;
         }
 
@@ -86,6 +100,9 @@ namespace EFDatabaseTask
                     break;
                 case 2:
                     reportOutputRichEditTextbox.Text = GenerateActiveCustomers();
+                    break;
+                case 3:
+                    reportOutputRichEditTextbox.Text = GenerateActivePets();
                     break;
             }
         }
