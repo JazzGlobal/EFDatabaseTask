@@ -72,7 +72,7 @@ namespace EFDatabaseTask
 
             foreach(PET pet in petList)
             {
-                petFormattedString += $"{pet.PET_NAME}\n";
+                petFormattedString += $"Pet Name: {pet.PET_NAME}\nOwner: {pet.customer.customerName}\n\n";
             }
             return petFormattedString;
         }
