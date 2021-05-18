@@ -56,5 +56,19 @@ namespace EFDatabaseTask
             Reports r_form = new Reports();
             r_form.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PetEdit p_edit = new PetEdit();
+            try
+            {
+                p_edit.ShowDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Unable to perform this action. Closing Pet Window");
+                Console.WriteLine(ex);
+            }
+        }
     }
 }

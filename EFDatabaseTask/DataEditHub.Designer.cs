@@ -36,6 +36,7 @@ namespace EFDatabaseTask
             this.label2 = new System.Windows.Forms.Label();
             this.viewCalendarButton = new System.Windows.Forms.Button();
             this.viewReportsButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // editCustomersButton
@@ -106,11 +107,22 @@ namespace EFDatabaseTask
             this.viewReportsButton.UseVisualStyleBackColor = true;
             this.viewReportsButton.Click += new System.EventHandler(this.viewReportsButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(9, 202);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(232, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Edit Pets";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DataEditHub
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 212);
+            this.ClientSize = new System.Drawing.Size(257, 233);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.viewReportsButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.viewCalendarButton);
@@ -136,5 +148,6 @@ namespace EFDatabaseTask
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button viewCalendarButton;
         private System.Windows.Forms.Button viewReportsButton;
+        private System.Windows.Forms.Button button1;
     }
 }
