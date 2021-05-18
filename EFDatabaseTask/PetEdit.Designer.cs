@@ -180,7 +180,6 @@ namespace EFDatabaseTask
             // pETBindingNavigatorSaveItem
             // 
             this.pETBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pETBindingNavigatorSaveItem.Enabled = false;
             this.pETBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("pETBindingNavigatorSaveItem.Image")));
             this.pETBindingNavigatorSaveItem.Name = "pETBindingNavigatorSaveItem";
             this.pETBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
@@ -202,12 +201,14 @@ namespace EFDatabaseTask
             this.pETDataGridView.Name = "pETDataGridView";
             this.pETDataGridView.Size = new System.Drawing.Size(546, 327);
             this.pETDataGridView.TabIndex = 1;
+            this.pETDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.pETDataGridView_CellValidating);
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "PET_ID";
             this.dataGridViewTextBoxColumn1.HeaderText = "PET_ID";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
