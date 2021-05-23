@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,14 @@ namespace EFDatabaseTask
             } catch (DbEntityValidationException ex)
             {
                 Console.WriteLine(ex);
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException dbUpdateEx)
+            {
+                var checkExForFKeyConstraint = dbUpdateEx.InnerException.InnerException.Message;
+                if(dbUpdateEx.InnerException.InnerException.Message.Contains("foreign key constraint fails"))
+                {
+                    MessageBox.Show(checkExForFKeyConstraint, "CustomerID Not Valid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void pETBindingNavigatorSaveItem_Click(object sender, EventArgs e)
