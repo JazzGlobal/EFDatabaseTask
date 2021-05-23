@@ -19,6 +19,9 @@ namespace EFDatabaseTaskTests
         {
             dbcontext.clean_database();
         }
+        /// <summary>
+        /// Adds 2 customers and 2 PETs. Queries the database using ReportData.GetAllActivePets(). Should Assert query row (count = 2) = true.
+        /// </summary>
         [TestMethod]
         public void GetAllActivePets_ResetDBAdd2Pets_Return2()
         {
@@ -35,6 +38,9 @@ namespace EFDatabaseTaskTests
             // Cleanup
             CleanDatabase();
         }
+        /// <summary>
+        /// Adds 2 customers and 2 PETs. Queries the database using ReportData.GetAllActiveCustomers(). Should Assert query row (count = 2) = true.
+        /// </summary>
         [TestMethod]
         public void GetAllActiveCustomers_ResetDBAdd2Customers_Return2() 
         {
