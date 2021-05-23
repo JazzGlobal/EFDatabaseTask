@@ -171,6 +171,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="clean_database" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="U07lyX" />
+        <Function Name="unit_test_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="U07lyX" />
         <EntityContainer Name="U07lyXModelStoreContainer">
           <EntitySet Name="address" EntityType="Self.address" Schema="U07lyX" store:Type="Tables" />
           <EntitySet Name="appointment" EntityType="Self.appointment" Schema="U07lyX" store:Type="Tables" />
@@ -395,6 +397,8 @@
             <End Role="customer" EntitySet="customers" />
             <End Role="PET" EntitySet="PETs" />
           </AssociationSet>
+          <FunctionImport Name="clean_database" />
+          <FunctionImport Name="unit_test_1" />
         </EntityContainer>
         <EntityType Name="PET">
           <Key>
@@ -526,6 +530,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="clean_database" FunctionName="U07lyXModel.Store.clean_database" />
+          <FunctionImportMapping FunctionImportName="unit_test_1" FunctionName="U07lyXModel.Store.unit_test_1" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

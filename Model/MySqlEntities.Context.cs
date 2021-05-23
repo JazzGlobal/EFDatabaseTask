@@ -12,6 +12,8 @@ namespace Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class U07lyXEntities : DbContext
     {
@@ -32,5 +34,15 @@ namespace Model
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<PET> PETs { get; set; }
+    
+        public virtual int clean_database()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("clean_database");
+        }
+    
+        public virtual int unit_test_1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("unit_test_1");
+        }
     }
 }
