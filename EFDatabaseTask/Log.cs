@@ -19,5 +19,19 @@ namespace EFDatabaseTask.Logger
                 return false;
             }
         }
+        public static bool LogEvent(string filename, Exception ex)
+        {
+            try
+            {
+                string formatString = $"\n======================================\n {DateTime.Now}: {ex}: {ex.Message} \n======================================\n";
+                File.AppendAllText(filename, formatString);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }
