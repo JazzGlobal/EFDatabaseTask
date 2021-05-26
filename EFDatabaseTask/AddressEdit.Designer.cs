@@ -52,12 +52,8 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdateBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingNavigator)).BeginInit();
             this.addressBindingNavigator.SuspendLayout();
@@ -204,12 +200,8 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12});
+            this.createdBy,
+            this.lastUpdateBy});
             this.addressDataGridView.DataSource = this.addressBindingSource;
             this.addressDataGridView.Location = new System.Drawing.Point(12, 28);
             this.addressDataGridView.Name = "addressDataGridView";
@@ -252,41 +244,17 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn6.HeaderText = "phone";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // dataGridViewTextBoxColumn7
+            // createdBy
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "createDate";
-            this.dataGridViewTextBoxColumn7.HeaderText = "createDate";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.createdBy.DataPropertyName = "createdBy";
+            this.createdBy.HeaderText = "createdBy";
+            this.createdBy.Name = "createdBy";
             // 
-            // dataGridViewTextBoxColumn8
+            // lastUpdateBy
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "createdBy";
-            this.dataGridViewTextBoxColumn8.HeaderText = "createdBy";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "lastUpdate";
-            this.dataGridViewTextBoxColumn9.HeaderText = "lastUpdate";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "lastUpdateBy";
-            this.dataGridViewTextBoxColumn10.HeaderText = "lastUpdateBy";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "city";
-            this.dataGridViewTextBoxColumn11.HeaderText = "city";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "customers";
-            this.dataGridViewTextBoxColumn12.HeaderText = "customers";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.lastUpdateBy.DataPropertyName = "lastUpdateBy";
+            this.lastUpdateBy.HeaderText = "lastUpdateBy";
+            this.lastUpdateBy.Name = "lastUpdateBy";
             // 
             // AddressEdit
             // 
@@ -333,11 +301,7 @@ namespace EFDatabaseTask
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdateBy;
     }
 }
