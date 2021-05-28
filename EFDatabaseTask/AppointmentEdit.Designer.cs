@@ -46,6 +46,8 @@ namespace EFDatabaseTask
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.appointmentBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.appointmentDataGridView = new System.Windows.Forms.DataGridView();
+            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,8 +65,6 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingNavigator)).BeginInit();
             this.appointmentBindingNavigator.SuspendLayout();
@@ -233,6 +233,14 @@ namespace EFDatabaseTask
             this.appointmentDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.appointmentDataGridView_CellValidated);
             this.appointmentDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appointmentDataGridView_CellValidating);
             // 
+            // customerBindingSource
+            // 
+            this.customerBindingSource.DataSource = typeof(Model.customer);
+            // 
+            // customerBindingSource1
+            // 
+            this.customerBindingSource1.DataSource = typeof(Model.customer);
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "appointmentId";
@@ -329,21 +337,15 @@ namespace EFDatabaseTask
             this.dataGridViewTextBoxColumn17.DataPropertyName = "user";
             this.dataGridViewTextBoxColumn17.HeaderText = "user";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
             // 
             // customer
             // 
             this.customer.DataPropertyName = "customer";
             this.customer.HeaderText = "customer";
             this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
             this.customer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(Model.customer);
-            // 
-            // customerBindingSource1
-            // 
-            this.customerBindingSource1.DataSource = typeof(Model.customer);
             // 
             // AppointmentEdit
             // 
