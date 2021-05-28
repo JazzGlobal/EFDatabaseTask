@@ -1,7 +1,7 @@
 ﻿
 namespace EFDatabaseTask
 {
-    partial class CustomerEdit
+    partial class PetSearchForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,10 @@ namespace EFDatabaseTask
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerEdit));
-            this.customerBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PetSearchForm));
+            this.pETBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pETBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -44,29 +44,35 @@ namespace EFDatabaseTask
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.customerBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.customerDataGridView = new System.Windows.Forms.DataGridView();
+            this.pETBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.pETDataGridView = new System.Windows.Forms.DataGridView();
+            this.filterResultsTextBox = new System.Windows.Forms.TextBox();
+            this.filterResultsButton = new System.Windows.Forms.Button();
+            this.filterLabel = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.addressId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingNavigator)).BeginInit();
-            this.customerBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pETBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pETBindingNavigator)).BeginInit();
+            this.pETBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pETDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // customerBindingNavigator
+            // pETBindingSource
             // 
-            this.customerBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.customerBindingNavigator.BindingSource = this.customerBindingSource;
-            this.customerBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.customerBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.customerBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pETBindingSource.DataSource = typeof(Model.PET);
+            // 
+            // pETBindingNavigator
+            // 
+            this.pETBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.pETBindingNavigator.BindingSource = this.pETBindingSource;
+            this.pETBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.pETBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.pETBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -78,30 +84,27 @@ namespace EFDatabaseTask
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
-            this.customerBindingNavigatorSaveItem});
-            this.customerBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.customerBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.customerBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.customerBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.customerBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.customerBindingNavigator.Name = "customerBindingNavigator";
-            this.customerBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.customerBindingNavigator.Size = new System.Drawing.Size(516, 25);
-            this.customerBindingNavigator.TabIndex = 0;
-            this.customerBindingNavigator.Text = "bindingNavigator1";
+            this.pETBindingNavigatorSaveItem});
+            this.pETBindingNavigator.Location = new System.Drawing.Point(0, 0);
+            this.pETBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.pETBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.pETBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.pETBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.pETBindingNavigator.Name = "pETBindingNavigator";
+            this.pETBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.pETBindingNavigator.Size = new System.Drawing.Size(533, 25);
+            this.pETBindingNavigator.TabIndex = 0;
+            this.pETBindingNavigator.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
             // 
             this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Enabled = false;
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // customerBindingSource
-            // 
-            this.customerBindingSource.DataSource = typeof(Model.customer);
             // 
             // bindingNavigatorCountItem
             // 
@@ -113,6 +116,7 @@ namespace EFDatabaseTask
             // bindingNavigatorDeleteItem
             // 
             this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Enabled = false;
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
@@ -146,6 +150,7 @@ namespace EFDatabaseTask
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -179,100 +184,129 @@ namespace EFDatabaseTask
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // customerBindingNavigatorSaveItem
+            // pETBindingNavigatorSaveItem
             // 
-            this.customerBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.customerBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("customerBindingNavigatorSaveItem.Image")));
-            this.customerBindingNavigatorSaveItem.Name = "customerBindingNavigatorSaveItem";
-            this.customerBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.customerBindingNavigatorSaveItem.Text = "Save Data";
-            this.customerBindingNavigatorSaveItem.Click += new System.EventHandler(this.customerBindingNavigatorSaveItem_Click);
+            this.pETBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pETBindingNavigatorSaveItem.Enabled = false;
+            this.pETBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("pETBindingNavigatorSaveItem.Image")));
+            this.pETBindingNavigatorSaveItem.Name = "pETBindingNavigatorSaveItem";
+            this.pETBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
+            this.pETBindingNavigatorSaveItem.Text = "Save Data";
             // 
-            // customerDataGridView
+            // pETDataGridView
             // 
-            this.customerDataGridView.AutoGenerateColumns = false;
-            this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.pETDataGridView.AutoGenerateColumns = false;
+            this.pETDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pETDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.customerId,
-            this.dataGridViewCheckBoxColumn1,
-            this.addressId,
+            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
-            this.customerDataGridView.DataSource = this.customerBindingSource;
-            this.customerDataGridView.Location = new System.Drawing.Point(12, 33);
-            this.customerDataGridView.Name = "customerDataGridView";
-            this.customerDataGridView.Size = new System.Drawing.Size(494, 295);
-            this.customerDataGridView.TabIndex = 1;
+            this.dataGridViewTextBoxColumn6});
+            this.pETDataGridView.DataSource = this.pETBindingSource;
+            this.pETDataGridView.Location = new System.Drawing.Point(12, 70);
+            this.pETDataGridView.Name = "pETDataGridView";
+            this.pETDataGridView.Size = new System.Drawing.Size(509, 220);
+            this.pETDataGridView.TabIndex = 1;
+            // 
+            // filterResultsTextBox
+            // 
+            this.filterResultsTextBox.Location = new System.Drawing.Point(12, 44);
+            this.filterResultsTextBox.Name = "filterResultsTextBox";
+            this.filterResultsTextBox.Size = new System.Drawing.Size(100, 20);
+            this.filterResultsTextBox.TabIndex = 2;
+            // 
+            // filterResultsButton
+            // 
+            this.filterResultsButton.Location = new System.Drawing.Point(118, 42);
+            this.filterResultsButton.Name = "filterResultsButton";
+            this.filterResultsButton.Size = new System.Drawing.Size(75, 23);
+            this.filterResultsButton.TabIndex = 3;
+            this.filterResultsButton.Text = "Filter";
+            this.filterResultsButton.UseVisualStyleBackColor = true;
+            this.filterResultsButton.Click += new System.EventHandler(this.filterResultsButton_Click);
+            // 
+            // filterLabel
+            // 
+            this.filterLabel.AutoSize = true;
+            this.filterLabel.Location = new System.Drawing.Point(9, 28);
+            this.filterLabel.Name = "filterLabel";
+            this.filterLabel.Size = new System.Drawing.Size(94, 13);
+            this.filterLabel.TabIndex = 4;
+            this.filterLabel.Text = "Filter By Pet Name";
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(199, 42);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(75, 23);
+            this.refreshButton.TabIndex = 5;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "PET_ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "PET_ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "customerName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "customerName";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "PET_NAME";
+            this.dataGridViewTextBoxColumn2.HeaderText = "PET_NAME";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // customerId
+            // dataGridViewTextBoxColumn3
             // 
-            this.customerId.DataPropertyName = "customerId";
-            this.customerId.HeaderText = "customerId";
-            this.customerId.Name = "customerId";
-            this.customerId.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "active";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "active";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            // 
-            // addressId
-            // 
-            this.addressId.DataPropertyName = "addressId";
-            this.addressId.HeaderText = "addressId";
-            this.addressId.Name = "addressId";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "ACTIVE";
+            this.dataGridViewTextBoxColumn3.HeaderText = "ACTIVE";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "createDate";
-            this.dataGridViewTextBoxColumn4.HeaderText = "createDate";
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "CUSTOMER_ID";
+            this.dataGridViewTextBoxColumn4.HeaderText = "CUSTOMER_ID";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "createdBy";
-            this.dataGridViewTextBoxColumn5.HeaderText = "createdBy";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "PET_TYPE";
+            this.dataGridViewTextBoxColumn5.HeaderText = "PET_TYPE";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "lastUpdate";
-            this.dataGridViewTextBoxColumn6.HeaderText = "lastUpdate";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "customer";
+            this.dataGridViewTextBoxColumn6.HeaderText = "customer";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "lastUpdateBy";
-            this.dataGridViewTextBoxColumn7.HeaderText = "lastUpdateBy";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // CustomerEdit
+            // PetSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 340);
-            this.Controls.Add(this.customerDataGridView);
-            this.Controls.Add(this.customerBindingNavigator);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "CustomerEdit";
-            this.Text = "CustomerEdit";
-            this.Load += new System.EventHandler(this.CustomerEdit_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingNavigator)).EndInit();
-            this.customerBindingNavigator.ResumeLayout(false);
-            this.customerBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).EndInit();
+            this.ClientSize = new System.Drawing.Size(533, 308);
+            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.filterLabel);
+            this.Controls.Add(this.filterResultsButton);
+            this.Controls.Add(this.filterResultsTextBox);
+            this.Controls.Add(this.pETDataGridView);
+            this.Controls.Add(this.pETBindingNavigator);
+            this.Name = "PetSearchForm";
+            this.Text = "PetSearchForm";
+            this.Load += new System.EventHandler(this.PetSearchForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pETBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pETBindingNavigator)).EndInit();
+            this.pETBindingNavigator.ResumeLayout(false);
+            this.pETBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pETDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,8 +314,8 @@ namespace EFDatabaseTask
 
         #endregion
 
-        private System.Windows.Forms.BindingSource customerBindingSource;
-        private System.Windows.Forms.BindingNavigator customerBindingNavigator;
+        private System.Windows.Forms.BindingSource pETBindingSource;
+        private System.Windows.Forms.BindingNavigator pETBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -293,15 +327,17 @@ namespace EFDatabaseTask
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton customerBindingNavigatorSaveItem;
-        private System.Windows.Forms.DataGridView customerDataGridView;
+        private System.Windows.Forms.ToolStripButton pETBindingNavigatorSaveItem;
+        private System.Windows.Forms.DataGridView pETDataGridView;
+        private System.Windows.Forms.TextBox filterResultsTextBox;
+        private System.Windows.Forms.Button filterResultsButton;
+        private System.Windows.Forms.Label filterLabel;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerId;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

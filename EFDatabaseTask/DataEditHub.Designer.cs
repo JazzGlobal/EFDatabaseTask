@@ -37,6 +37,7 @@ namespace EFDatabaseTask
             this.viewCalendarButton = new System.Windows.Forms.Button();
             this.viewReportsButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.searchPetsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // editCustomersButton
@@ -117,11 +118,22 @@ namespace EFDatabaseTask
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // searchPetsButton
+            // 
+            this.searchPetsButton.Location = new System.Drawing.Point(9, 231);
+            this.searchPetsButton.Name = "searchPetsButton";
+            this.searchPetsButton.Size = new System.Drawing.Size(232, 23);
+            this.searchPetsButton.TabIndex = 9;
+            this.searchPetsButton.Text = "Search Pets";
+            this.searchPetsButton.UseVisualStyleBackColor = true;
+            this.searchPetsButton.Click += new System.EventHandler(this.searchPetsButton_Click);
+            // 
             // DataEditHub
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 233);
+            this.ClientSize = new System.Drawing.Size(257, 262);
+            this.Controls.Add(this.searchPetsButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.viewReportsButton);
             this.Controls.Add(this.label2);
@@ -149,5 +161,6 @@ namespace EFDatabaseTask
         private System.Windows.Forms.Button viewCalendarButton;
         private System.Windows.Forms.Button viewReportsButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button searchPetsButton;
     }
 }

@@ -70,5 +70,18 @@ namespace EFDatabaseTask
                 Console.WriteLine(ex);
             }
         }
+
+        private void searchPetsButton_Click(object sender, EventArgs e)
+        {
+            PetSearchForm p_search = new PetSearchForm();
+            try
+            {
+                p_search.ShowDialog();
+            } catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Unable to perform this action. Closing Pet Window");
+                Console.WriteLine(ex);
+            }
+        }
     }
 }
